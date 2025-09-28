@@ -2,6 +2,13 @@
 
 type Row = {
   nama_desa: string;
+  [key: string]: number;
+};
+
+
+
+type Row = {
+  nama_desa: string;
   [key: string]: string | number;
 };
 
@@ -23,8 +30,8 @@ export default function SDG2Page() {
         if (d.length > 0) {
           // urutkan berdasarkan penderita gizi buruk
           d.sort((a: Row, b: Row) => {
-            const va = parseFloat(a["Jumlah penderita gizi buruk"]) || 0;
-            const vb = parseFloat(b["Jumlah penderita gizi buruk"]) || 0;
+            const va = a["Jumlah penderita gizi buruk"] || 0;
+            const vb = b["Jumlah penderita gizi buruk"] || 0;
             return va - vb;
           });
         }
@@ -37,12 +44,12 @@ export default function SDG2Page() {
 
   // === Hitung Ringkasan ===
   const totalGiziBuruk = dataSDG2.reduce(
-    (sum, row) => sum + (parseFloat(row["Jumlah penderita gizi buruk"]) || 0),
+    (sum, row) => sum + (row["Jumlah penderita gizi buruk"] || 0),
     0
   );
 
   const totalLuasPertanian = dataSDG2.reduce(
-    (sum, row) => sum + (parseFloat(row["Luas areal pertanian yang terdampak bencana alam"]) || 0),
+    (sum, row) => sum + (row["Luas areal pertanian yang terdampak bencana alam"] || 0),
     0
   );
 

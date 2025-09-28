@@ -2,6 +2,13 @@
 
 type Row = {
   nama_desa: string;
+  [key: string]: number;
+};
+
+
+
+type Row = {
+  nama_desa: string;
   [key: string]: string | number;
 };
 
@@ -22,8 +29,8 @@ export default function SDG1Page() {
       .then(d => {
         if (d.length > 0) {
           d.sort((a: Row, b: Row) => {
-            const va = parseFloat(a["jumlah surat keterangan miskin diterbitkan"]) || 0;
-            const vb = parseFloat(b["jumlah surat keterangan miskin diterbitkan"]) || 0;
+            const va = a["jumlah surat keterangan miskin diterbitkan"] || 0;
+            const vb = b["jumlah surat keterangan miskin diterbitkan"] || 0;
             return va - vb;
           });
         }
@@ -44,7 +51,7 @@ export default function SDG1Page() {
 
   // === Hitung Ringkasan ===
   const totalSKTM = dataSDG1.reduce(
-    (sum, row) => sum + (parseFloat(row["jumlah surat keterangan miskin diterbitkan"]) || 0),
+    (sum, row) => sum + (row["jumlah surat keterangan miskin diterbitkan"] || 0),
     0
   );
 

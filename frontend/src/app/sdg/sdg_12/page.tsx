@@ -2,6 +2,13 @@
 
 type Row = {
   nama_desa: string;
+  [key: string]: number;
+};
+
+
+
+type Row = {
+  nama_desa: string;
   [key: string]: string | number;
 };
 

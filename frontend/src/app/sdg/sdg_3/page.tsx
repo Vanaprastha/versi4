@@ -2,6 +2,13 @@
 
 type Row = {
   nama_desa: string;
+  [key: string]: number;
+};
+
+
+
+type Row = {
+  nama_desa: string;
   [key: string]: string | number;
 };
 
@@ -27,15 +34,15 @@ export default function SDG3Page() {
 
   // === Hitung total untuk card ===
   const totalPuskesmas = data.reduce(
-    (sum, row) => sum + (parseFloat(row["Jumlah Puskesmas dengan sarana Rawat Inap"]) || 0),
+    (sum, row) => sum + (row["Jumlah Puskesmas dengan sarana Rawat Inap"] || 0),
     0
   );
   const totalPosyandu = data.reduce(
-    (sum, row) => sum + (parseFloat(row["Jumlah Posyandu Aktif"]) || 0),
+    (sum, row) => sum + (row["Jumlah Posyandu Aktif"] || 0),
     0
   );
   const totalKader = data.reduce(
-    (sum, row) => sum + (parseFloat(row["Jumlah Kader KB/KIA"]) || 0),
+    (sum, row) => sum + (row["Jumlah Kader KB/KIA"] || 0),
     0
   );
 
