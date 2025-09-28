@@ -3,15 +3,9 @@
 import { Row } from "@/types";
 
 
-  nama_desa: string;
-  [key: string]: number;
-};
 
 
 
-  nama_desa: string;
-  [key: string]: string | number;
-};
 
 
 
@@ -37,7 +31,6 @@ export default function SDG17Page() {
     proklim: data.filter(d => d["Status desa termasuk Program Kampung Iklim (Proklim)"] === "termasuk").length,
     perhutanan: data.filter(d => d["Keberadaan Program perhutanan sosial"] === "ada").length,
     siaran: data.filter(d => d["status penerimaan program siaran televisi/radio swasta"] === "bisa diterima").length,
-  };
 
   // Tooltip custom untuk Pie
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -56,7 +49,6 @@ export default function SDG17Page() {
       );
     }
     return null;
-  };
 
   // Fungsi untuk render PieChart per indikator
   const renderPieChart = (key: string, title: string) => {
@@ -98,7 +90,6 @@ export default function SDG17Page() {
         </div>
       </div>
     );
-  };
 
   return (
     <div className="p-6 space-y-6">

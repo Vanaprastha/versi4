@@ -3,15 +3,9 @@
 import { Row } from "@/types";
 
 
-  nama_desa: string;
-  [key: string]: number;
-};
 
 
 
-  nama_desa: string;
-  [key: string]: string | number;
-};
 
 
 

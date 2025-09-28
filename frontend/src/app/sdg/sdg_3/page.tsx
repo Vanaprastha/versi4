@@ -3,15 +3,9 @@
 import { Row } from "@/types";
 
 
-  nama_desa: string;
-  [key: string]: number;
-};
 
 
 
-  nama_desa: string;
-  [key: string]: string | number;
-};
 
 
 
@@ -60,7 +54,6 @@ export default function SDG3Page() {
       );
     }
     return null;
-  };
 
   // Tooltip custom untuk pie chart
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -82,7 +75,6 @@ export default function SDG3Page() {
       );
     }
     return null;
-  };
 
   return (
     <div className="p-6 space-y-6">

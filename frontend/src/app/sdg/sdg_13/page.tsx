@@ -3,15 +3,9 @@
 import { Row } from "@/types";
 
 
-  nama_desa: string;
-  [key: string]: number;
-};
 
 
 
-  nama_desa: string;
-  [key: string]: string | number;
-};
 
 
 
@@ -49,7 +43,6 @@ export default function SDG13Page() {
     simulasi: data.filter(
       (d) => d["Partisipasi_Simulasi_Bencana"] !== "Tidak ada warga"
     ).length,
-  };
 
   // Tooltip custom
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -73,7 +66,6 @@ export default function SDG13Page() {
       );
     }
     return null;
-  };
 
   // Render Pie Chart per indikator
   const renderPieChart = (key: string) => {
@@ -119,7 +111,6 @@ export default function SDG13Page() {
         </div>
       </div>
     );
-  };
 
   return (
     <div className="p-6 space-y-6">

@@ -3,15 +3,9 @@
 import { Row } from "@/types";
 
 
-  nama_desa: string;
-  [key: string]: number;
-};
 
 
 
-  nama_desa: string;
-  [key: string]: string | number;
-};
 
 
 
@@ -45,7 +39,6 @@ export default function SDG9Page() {
       String(d["Akses jalan darat dari sentra produksi pertanian ke jalan utama dapat dilalui kendaraan roda 4 lebih"])
         .includes("Sepanjang tahun")
     ).length,
-  };
 
   // Tooltip custom untuk pie chart
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -67,7 +60,6 @@ export default function SDG9Page() {
       );
     }
     return null;
-  };
 
   // Fungsi untuk generate pie chart
   const renderPieChart = (key: string, title: string) => {
@@ -113,7 +105,6 @@ export default function SDG9Page() {
         </div>
       </div>
     );
-  };
 
   return (
     <div className="p-6 space-y-6">

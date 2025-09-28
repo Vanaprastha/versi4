@@ -3,15 +3,9 @@
 import { Row } from "@/types";
 
 
-  nama_desa: string;
-  [key: string]: number;
-};
 
 
 
-  nama_desa: string;
-  [key: string]: string | number;
-};
 
 
 
@@ -40,7 +34,6 @@ export default function SDG11Page() {
     rambuEvakuasi: data.filter((d) => d["Fasilitas Rambu–rambu dan jalur evakuasi bencana"] === "ada").length,
     desaTangguh: data.filter((d) => d["Status Desa Tangguh Bencana"] === "termasuk").length,
     programLingkungan: data.filter((d) => d["Keberadaan program pengelolaan lingkungan perumahan desa/kelurahan"] === "ada").length,
-  };
 
   // Tooltip custom
   const CustomTooltipPie = ({ active, payload }: any) => {
@@ -62,7 +55,6 @@ export default function SDG11Page() {
       );
     }
     return null;
-  };
 
   // Fungsi render Pie Chart per indikator
   const renderPieChart = (key: string) => {
@@ -108,7 +100,6 @@ export default function SDG11Page() {
         </div>
       </div>
     );
-  };
 
   return (
     <div className="p-6 space-y-6">
