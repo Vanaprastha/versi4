@@ -12,8 +12,8 @@ export default function SDG13Page() {
       .then((d: Row[]) => {
         if (d.length > 0) {
           d.sort((a: Row, b: Row) => {
-            const va = a["jumlah surat keterangan miskin diterbitkan"] || 0;
-            const vb = b["jumlah surat keterangan miskin diterbitkan"] || 0;
+            const va = Number(a["jumlah surat keterangan miskin diterbitkan"]) || 0;
+            const vb = Number(b["jumlah surat keterangan miskin diterbitkan"]) || 0;
             return va - vb;
           });
         }
