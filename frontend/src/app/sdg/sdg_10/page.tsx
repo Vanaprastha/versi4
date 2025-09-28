@@ -1,5 +1,12 @@
 "use client";
 
+type Row = {
+  nama_desa: string;
+  [key: string]: string | number;
+};
+
+
+
 import { useEffect, useState } from "react";
 
 export default function SDG10Page() {

@@ -1,5 +1,12 @@
 "use client";
 
+type Row = {
+  nama_desa: string;
+  [key: string]: string | number;
+};
+
+
+
 import { useEffect, useState } from "react";
 import {
   PieChart, Pie, Cell, ResponsiveContainer, Legend, Tooltip
@@ -142,4 +149,3 @@ export default function SDG15Page() {
     </div>
   );
 }
-

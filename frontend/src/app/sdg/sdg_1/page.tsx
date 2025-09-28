@@ -1,5 +1,12 @@
 "use client";
 
+type Row = {
+  nama_desa: string;
+  [key: string]: string | number;
+};
+
+
+
 import { useState, useEffect } from "react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
@@ -14,7 +21,7 @@ export default function SDG1Page() {
       .then(res => res.json())
       .then(d => {
         if (d.length > 0) {
-          d.sort((a, b) => {
+          d.sort((a: Row, b: Row) => {
             const va = parseFloat(a["jumlah surat keterangan miskin diterbitkan"]) || 0;
             const vb = parseFloat(b["jumlah surat keterangan miskin diterbitkan"]) || 0;
             return va - vb;
@@ -202,4 +209,3 @@ export default function SDG1Page() {
     </div>
   );
 }
-

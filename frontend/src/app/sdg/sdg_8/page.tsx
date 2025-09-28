@@ -1,5 +1,12 @@
 "use client";
 
+type Row = {
+  nama_desa: string;
+  [key: string]: string | number;
+};
+
+
+
 import { useEffect, useState } from "react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
@@ -176,4 +183,3 @@ export default function SDG8Page() {
     </div>
   );
 }
-

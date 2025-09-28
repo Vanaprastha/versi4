@@ -1,5 +1,12 @@
 "use client";
 
+type Row = {
+  nama_desa: string;
+  [key: string]: string | number;
+};
+
+
+
 import { useState, useEffect } from "react";
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer,
@@ -15,7 +22,7 @@ export default function SDG2Page() {
       .then(d => {
         if (d.length > 0) {
           // urutkan berdasarkan penderita gizi buruk
-          d.sort((a, b) => {
+          d.sort((a: Row, b: Row) => {
             const va = parseFloat(a["Jumlah penderita gizi buruk"]) || 0;
             const vb = parseFloat(b["Jumlah penderita gizi buruk"]) || 0;
             return va - vb;
@@ -176,4 +183,3 @@ export default function SDG2Page() {
     </div>
   );
 }
-
