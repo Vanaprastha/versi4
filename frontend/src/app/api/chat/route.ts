@@ -1,24 +1,15 @@
 import { NextRequest } from "next/server";
-import { createClient } from "@supabase/supabase-js";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export const runtime = "nodejs";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY as string
-);
-
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
-const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
+const model = genAI.getGenerativeModel({ model: "gemini-pro" });
 
-// ✅ gunakan new RegExp supaya tidak bentrok di build
-const detectRegex = new RegExp("\\b(1?[0-7]|[1-9])\\b", "g");
-
+// --- fungsi deteksi SDG yang ditanya
 function detectTargetTables(question: string): number[] {
-  const nums = Array.from(
-    new Set((question.match(detectRegex) || []).map((n) => parseInt(n, 10)))
-  ).filter((n) => n >= 1 && n <= 17);
+  const nums = Array.from(new Set((question.match(/\b(1?[0-7]|[1-9])\b/g) || []).map(n => parseInt(n, 10))))
+    .filter(n => n >= 1 && n <= 17);
   return nums.length ? nums : [1];
 }
 
@@ -27,81 +18,40 @@ export async function POST(req: NextRequest) {
     const body = await req.json();
     const question: string = (body?.question || "").toString();
     if (!question) {
-      return new Response(
-        JSON.stringify({ error: "Question is required" }),
-        { status: 400 }
-      );
+      return new Response(JSON.stringify({ error: "Question is required" }), { status: 400 });
     }
 
     const targets = detectTargetTables(question);
     const previews: Record<string, any[]> = {};
-    const totals: Record<string, number> = {};
 
     for (const n of targets) {
-      const table = `sdgs_${n}`;
-      const { data, error } = await supabase.from(table).select("*").limit(50);
-      if (error) {
-        return new Response(
-          JSON.stringify({
-            error: `Supabase error on ${table}: ${error.message}`,
-          }),
-          { status: 500 }
-        );
-      }
-      previews[table] = data || [];
-      if (data && data.length) {
-        const numericKeys = Object.keys(data[0] || {}).filter(
-          (k) => k !== "nama_desa"
-        );
-        let sum = 0;
-        for (const row of data as any[]) {
-          for (const k of numericKeys) {
-            const v = Number((row as any)[k]);
-            if (!Number.isNaN(v)) sum += v;
-          }
-        }
-        totals[table] = sum;
-      }
+      // 🔑 Ambil dari endpoint API kita sendiri
+      const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/sdgs${n}`);
+      const data = await res.json();
+      previews[`sdgs_${n}`] = data;
     }
 
-    // ✅ aman: pakai array.join dengan escape double-backslash
     const prompt = [
-      "Anda adalah asisten data untuk dashboard SDGs desa. Jawab secara ringkas, akurat, dan gunakan bahasa Indonesia yang sopan.",
+      "Anda adalah asisten data untuk dashboard SDGs desa.",
       `Pertanyaan pengguna: "${question}"`,
       "",
-      "Berikut ringkasan data (cuplikan maksimal 50 baris per tabel):",
+      "Berikut cuplikan data hasil mapping label:",
       Object.entries(previews)
-        .map(
-          ([table, rows]) =>
-            `${table} (contoh 5 baris):\\n${JSON.stringify(
-              (rows as any[]).slice(0, 5),
-              null,
-              2
-            )}`
-        )
-        .join("\\n\\n"),
-      "",
-      "Total numerik kasar (penjumlahan sederhana kolom numerik, bukan statistik resmi):",
-      JSON.stringify(totals, null, 2),
+        .map(([table, rows]) => `${table} (contoh 5 baris):\n${JSON.stringify((rows as any[]).slice(0, 5), null, 2)}`)
+        .join("\n\n"),
       "",
       "Instruksi:",
       "- Jelaskan jawaban berdasarkan data di atas.",
+      "- Gunakan nama kolom yang sudah jelas (bukan kode).",
       "- Jika ada keterbatasan (misal hanya cuplikan), jelaskan singkat.",
-      "- Berikan saran visualisasi relevan (bar/pie) bila cocok, tapi jangan kirim kode.",
-      "- Jangan mengarang data di luar cuplikan.",
-    ].join("\\n");
+    ].join("\n");
 
     const result = await model.generateContent(prompt);
     const answer = result.response.text();
 
-    return new Response(
-      JSON.stringify({ answer, previews, totals, used: targets }),
-      { status: 200 }
-    );
+    return new Response(JSON.stringify({ answer, previews, used: targets }), { status: 200 });
   } catch (err: any) {
-    return new Response(
-      JSON.stringify({ error: err?.message || "Unknown error" }),
-      { status: 500 }
-    );
+    return new Response(JSON.stringify({ error: err?.message || "Unknown error" }), { status: 500 });
   }
 }
+
