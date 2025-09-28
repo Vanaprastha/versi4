@@ -1,23 +1,24 @@
 "use client";
 
 import { Row } from "@/types";
-
-
-
-
-
-
-
-
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function SDG10Page() {
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<Row[]>([]);
 
   useEffect(() => {
     fetch("/api/sdgs10")
       .then((res) => res.json())
-      .then((d) => setData(d))
+      .then((d: Row[]) => {
+        if (d.length > 0) {
+          d.sort((a: Row, b: Row) => {
+            const va = a["jumlah surat keterangan miskin diterbitkan"] || 0;
+            const vb = b["jumlah surat keterangan miskin diterbitkan"] || 0;
+            return va - vb;
+          });
+        }
+        setData(d);
+      })
       .catch((err) => console.error(err));
   }, []);
 
