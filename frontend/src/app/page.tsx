@@ -35,7 +35,7 @@ export default function Dashboard() {
 
       <section className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {dummy.map((d) => (
-          <Link key={d.goalNo} href={`/sdg/sdg_${d.goalNo}` as string}>
+          <Link key={d.goalNo} href={`/sdg/sdg_${String(d.goalNo)}`}>
             <SDGCard {...d} />
           </Link>
         ))}
