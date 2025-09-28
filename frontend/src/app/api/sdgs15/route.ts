@@ -6,7 +6,7 @@ const supabase = createClient(
 );
 
 export async function GET(): Promise<Response> {
-  const { data: rows, error } = await supabase.from("sdgs15").select("*");
+  const { data: rows, error } = await supabase.from("sdgs_15").select("*");
   if (error) return new Response(JSON.stringify({ error: error.message }), { status: 500 });
 
   const { data: labels } = await supabase
