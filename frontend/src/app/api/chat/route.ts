@@ -4,7 +4,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 export const runtime = "nodejs";
 
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
-const model = genAI.getGenerativeModel({ model: 'gemini-2.5pro' });
+const model = genAI.getGenerativeModel({ model: 'gemini-2.5-pro' });
 
 
 // --- fungsi deteksi SDG yang ditanya
