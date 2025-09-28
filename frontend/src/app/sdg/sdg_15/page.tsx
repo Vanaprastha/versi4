@@ -1,13 +1,14 @@
 "use client";
 
-type Row = {
+import { Row } from "@/types";
+
+
   nama_desa: string;
   [key: string]: number;
 };
 
 
 
-type Row = {
   nama_desa: string;
   [key: string]: string | number;
 };
