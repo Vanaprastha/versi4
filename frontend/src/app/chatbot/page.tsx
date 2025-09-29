@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { ReactMarkdown } from "react-markdown/lib/react-markdown";
-
+import ReactMarkdown from "react-markdown";
 
 type Msg = { role: "user" | "bot"; text: string };
 
