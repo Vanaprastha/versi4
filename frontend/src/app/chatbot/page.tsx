@@ -8,26 +8,32 @@ export default function ChatbotPage() {
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [messages, setMessages] = useState<Msg[]>([
-    { role: "bot", text: "Halo! Saya chatbot SDGs. Tanyakan apa saja tentang data SDGs 1–17. 🚀" }
+    {
+      role: "bot",
+      text: "Halo! Saya chatbot SDGs. Tanyakan apa saja tentang data SDGs 1–17. 🚀",
+    },
   ]);
 
   const send = async () => {
     const q = input.trim();
     if (!q) return;
-    setMessages(prev => [...prev, { role: "user", text: q }]);
+    setMessages((prev) => [...prev, { role: "user", text: q }]);
     setInput("");
     setLoading(true);
     try {
       const res = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ question: q })
+        body: JSON.stringify({ question: q }),
       });
       const data = await res.json();
       const text = data?.answer || data?.error || "Maaf, terjadi kesalahan.";
-      setMessages(prev => [...prev, { role: "bot", text }]);
+      setMessages((prev) => [...prev, { role: "bot", text }]);
     } catch (e: any) {
-      setMessages(prev => [...prev, { role: "bot", text: "Gagal menghubungi server." }]);
+      setMessages((prev) => [
+        ...prev,
+        { role: "bot", text: "Gagal menghubungi server." },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -38,38 +44,64 @@ export default function ChatbotPage() {
   };
 
   return (
-    <div className="p-6 max-w-3xl mx-auto space-y-4">
-      <h1 className="text-2xl font-bold">💬 Chatbot SDGs (Gemini)</h1>
+    <div className="p-6 max-w-3xl mx-auto space-y-6">
+      <h1 className="text-3xl font-bold text-center text-blue-700">
+        💬 Chatbot SDGs
+      </h1>
+      <p className="text-center text-gray-600">
+        Tanyakan apa saja tentang data SDGs 1–17.
+      </p>
 
-      <div className="border rounded-lg p-4 h-96 overflow-y-auto bg-white/60 space-y-2">
+      {/* Chat Window */}
+      <div className="border rounded-2xl shadow-md p-4 h-96 overflow-y-auto bg-gradient-to-b from-white/90 to-blue-50/50 backdrop-blur space-y-3">
         {messages.map((m, i) => (
-          <div key={i} className={m.role === "user" ? "text-blue-700" : "text-green-700"}>
-            <b>{m.role === "user" ? "Kamu" : "Bot"}:</b> {m.text}
+          <div
+            key={i}
+            className={`flex ${
+              m.role === "user" ? "justify-end" : "justify-start"
+            }`}
+          >
+            <div
+              className={`px-4 py-2 rounded-2xl max-w-xs break-words ${
+                m.role === "user"
+                  ? "bg-blue-600 text-white self-end"
+                  : "bg-green-100 text-green-800"
+              }`}
+            >
+              <b>{m.role === "user" ? "Kamu" : "Bot"}:</b> {m.text}
+            </div>
           </div>
         ))}
-        {loading && <div className="text-gray-500">Mengetik…</div>}
+        {loading && (
+          <div className="text-gray-500 italic animate-pulse">Bot mengetik…</div>
+        )}
       </div>
 
-      <div className="flex gap-2">
+      {/* Input Box */}
+      <div className="flex gap-3">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={onKeyDown}
-          placeholder="Contoh: Tunjukkan desa dengan angka tertinggi di SDG 1"
-          className="flex-1 border rounded p-2"
+          placeholder="Contoh: Desa mana yang punya angka tertinggi di SDG 1?"
+          className="flex-1 border rounded-xl px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
         />
         <button
           onClick={send}
           disabled={loading}
-          className="px-4 py-2 rounded bg-blue-600 text-white disabled:opacity-50"
+          className="px-6 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition text-white font-medium shadow disabled:opacity-50"
         >
           Kirim
         </button>
       </div>
 
-      <p className="text-sm text-gray-600">
-        Tips: Tulis nomor SDG di pertanyaanmu (mis. "SDG 3" atau "SDG 1 dan 2") agar bot mengambil tabel yang tepat.
+      <p className="text-sm text-gray-600 text-center">
+        💡 Tips: Sertakan nomor SDG di pertanyaanmu <br /> (mis.{" "}
+        <span className="font-semibold">"SDG 3"</span> atau{" "}
+        <span className="font-semibold">"SDG 1 dan 2"</span>) agar bot tahu
+        tabel mana yang harus diambil.
       </p>
     </div>
   );
 }
+
