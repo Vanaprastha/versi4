@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
       "",
       "Berikut cuplikan data hasil mapping label:",
       Object.entries(previews)
-        .map(([table, rows]) => `${table} (contoh 5 baris):\n${JSON.stringify((rows as any[]).slice(0, 5), null, 2)}`)
+        .map(([table, rows]) => `${table} (Hasil untuk 8 desa tersedia):\n${JSON.stringify((rows as any[]).slice(0, 8), null, 2)}`)
         .join("\n\n"),
       "",
       "Instruksi:",
