@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import ReactMarkdown from "react-markdown";
 
 type Msg = { role: "user" | "bot"; text: string };
@@ -14,6 +14,13 @@ export default function ChatbotPage() {
       text: "Halo! Saya chatbot SDGs. Tanyakan apa saja tentang data SDGs 1–17. 🚀",
     },
   ]);
+
+  // Ref untuk auto-scroll
+  const bottomRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages, loading]);
 
   const send = async () => {
     const q = input.trim();
@@ -70,13 +77,16 @@ export default function ChatbotPage() {
               }`}
             >
               <b>{m.role === "user" ? "Kamu" : "Bot"}:</b>{" "}
-              <ReactMarkdown children={m.text} />
+              {/* @ts-expect-error react-markdown typing issue */}
+              <ReactMarkdown>{m.text}</ReactMarkdown>
             </div>
           </div>
         ))}
         {loading && (
           <div className="text-gray-500 italic animate-pulse">Bot mengetik…</div>
         )}
+        {/* Auto-scroll anchor */}
+        <div ref={bottomRef} />
       </div>
 
       {/* Input Box */}
