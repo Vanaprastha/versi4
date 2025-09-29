@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import ReactMarkdown from "react-markdown";
 
 type Msg = { role: "user" | "bot"; text: string };
 
@@ -62,13 +63,14 @@ export default function ChatbotPage() {
             }`}
           >
             <div
-              className={`px-4 py-2 rounded-2xl max-w-xs break-words ${
+              className={`px-4 py-2 rounded-2xl max-w-lg break-words prose prose-sm ${
                 m.role === "user"
                   ? "bg-blue-600 text-white self-end"
-                  : "bg-green-100 text-green-800"
+                  : "bg-green-100 text-green-900"
               }`}
             >
-              <b>{m.role === "user" ? "Kamu" : "Bot"}:</b> {m.text}
+              <b>{m.role === "user" ? "Kamu" : "Bot"}:</b>{" "}
+              <ReactMarkdown>{m.text}</ReactMarkdown>
             </div>
           </div>
         ))}
