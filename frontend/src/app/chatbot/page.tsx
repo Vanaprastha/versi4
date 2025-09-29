@@ -70,7 +70,7 @@ export default function ChatbotPage() {
               }`}
             >
               <b>{m.role === "user" ? "Kamu" : "Bot"}:</b>{" "}
-              <ReactMarkdown>{m.text}</ReactMarkdown>
+              <ReactMarkdown children={m.text} />
             </div>
           </div>
         ))}
