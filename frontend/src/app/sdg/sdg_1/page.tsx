@@ -46,7 +46,7 @@ export default function SDG1Page() {
   const CustomTooltipSKTM = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-black/80 text-white p-2 rounded-lg text-sm">
+        <div className="bg-white/80 text-white p-2 rounded-lg text-sm">
           <p className="font-semibold">{label}</p>
           <p>Jumlah SKTM: {payload[0].value}</p>
         </div>
@@ -70,7 +70,7 @@ export default function SDG1Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-black/80 text-white p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-white/80 text-white p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">

@@ -19,7 +19,7 @@ export default function SDG10Page() {
       {data.length === 0 ? (
         <p>Belum ada data untuk ditampilkan.</p>
       ) : (
-        <pre className="bg-black/30 p-4 rounded-lg text-sm overflow-x-auto">
+        <pre className="bg-white/30 p-4 rounded-lg text-sm overflow-x-auto">
           {JSON.stringify(data, null, 2)}
         </pre>
       )}

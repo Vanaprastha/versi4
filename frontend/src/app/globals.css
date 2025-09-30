@@ -34,10 +34,10 @@ body { color: var(--text-color); }
 body { @apply text-neutral-100; }
 
 /* Glassmorphism (gelap agar kontras) */
-.glass-1 { @apply bg-black/40 backdrop-blur-md border border-white/10; }
-.glass-2 { @apply bg-black/50 backdrop-blur-lg border border-white/10; }
-.glass-3 { @apply bg-black/55 backdrop-blur-xl border border-white/10; }
-.glass-4 { @apply bg-black/60 backdrop-blur-2xl border border-white/10; }
+.glass-1 { @apply bg-white/40 backdrop-blur-md border border-white/10; }
+.glass-2 { @apply bg-white/50 backdrop-blur-lg border border-white/10; }
+.glass-3 { @apply bg-white/55 backdrop-blur-xl border border-white/10; }
+.glass-4 { @apply bg-white/60 backdrop-blur-2xl border border-white/10; }
 
 /* Background helper */
 .bg-dashboard {

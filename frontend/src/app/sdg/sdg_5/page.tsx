@@ -34,7 +34,7 @@ export default function SDG5Page() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-black/80 text-white p-2 rounded-lg text-sm">
+        <div className="bg-white/80 text-white p-2 rounded-lg text-sm">
           <p className="font-semibold">{label}</p>
           {payload.map((p: any, i: number) => (
             <p key={i}>{p.name}: {p.value}</p>
