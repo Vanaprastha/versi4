@@ -47,7 +47,7 @@ export default function SDG13Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -75,7 +75,7 @@ export default function SDG13Page() {
     }));
 
     return (
-      <div className="glass-2 p-4 rounded-xl shadow">
+      <div className="glass-2 p-4 rounded-xl border border-white/20 shadow">
         <h4 className="text-md font-semibold mb-4 text-center">{key}</h4>
         <div className="w-full h-72 flex justify-center">
           <ResponsiveContainer>
@@ -121,23 +121,23 @@ export default function SDG13Page() {
 
       {/* Cards Ringkasan */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
+        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-sm">Desa Proklim</h4>
           <p className="text-xl text-gray-900 font-bold text-green-400">{summary.proklim}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
+        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-sm">Kejadian Banjir</h4>
           <p className="text-xl text-gray-900 font-bold text-green-400">{summary.banjir}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
+        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-sm">Kejadian Kekeringan</h4>
           <p className="text-xl text-gray-900 font-bold text-green-400">{summary.kekeringan}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
+        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-sm">Peringatan Dini</h4>
           <p className="text-xl text-gray-900 font-bold text-green-400">{summary.peringatan}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
+        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-sm">Simulasi Bencana</h4>
           <p className="text-xl text-gray-900 font-bold text-green-400">{summary.simulasi}</p>
         </div>

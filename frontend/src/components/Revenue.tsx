@@ -30,7 +30,7 @@ function CustomTooltip({
 }) {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-white/40 text-gray-800 border border-white/20 rounded-lg px-2 py-2 text-sm shadow-lg">
+      <div className="bg-white/40 text-gray-800 border border-white/20 rounded-lg border border-white/20 px-2 py-2 text-sm shadow-lg">
         <div className="font-medium">Tahun: {label}</div>
         <div className="opacity-90">Nilai: {payload[0].value}</div>
       </div>

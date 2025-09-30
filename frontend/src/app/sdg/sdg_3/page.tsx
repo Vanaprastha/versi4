@@ -37,7 +37,7 @@ export default function SDG3Page() {
   const CustomTooltipBar = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm">
           <p className="font-semibold">{label}</p>
           {payload.map((p: any, i: number) => (
             <p key={i}>{p.name}: {p.value}</p>
@@ -58,7 +58,7 @@ export default function SDG3Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -84,15 +84,15 @@ export default function SDG3Page() {
 
       {/* Cards Ringkasan */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className="glass-2 p-6 rounded-xl text-center shadow">
+        <div className="glass-2 p-6 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-lg mb-2">Total Puskesmas Rawat Inap</h4>
           <p className="text-3xl text-gray-900 font-extrabold text-red-400">{totalPuskesmas}</p>
         </div>
-        <div className="glass-2 p-6 rounded-xl text-center shadow">
+        <div className="glass-2 p-6 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-lg mb-2">Total Posyandu Aktif</h4>
           <p className="text-3xl text-gray-900 font-extrabold text-blue-400">{totalPosyandu}</p>
         </div>
-        <div className="glass-2 p-6 rounded-xl text-center shadow">
+        <div className="glass-2 p-6 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-lg mb-2">Total Kader KB/KIA</h4>
           <p className="text-3xl text-gray-900 font-extrabold text-green-400">{totalKader}</p>
         </div>
@@ -158,7 +158,7 @@ export default function SDG3Page() {
             }));
 
             return (
-              <div key={idx} className="glass-2 p-4 rounded-xl shadow">
+              <div key={idx} className="glass-2 p-4 rounded-xl border border-white/20 shadow">
                 <h4 className="text-md font-semibold mb-4 text-center">{key}</h4>
                 <div className="w-full h-72 flex justify-center">
                   <ResponsiveContainer>

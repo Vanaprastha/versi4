@@ -31,7 +31,7 @@ export default function SDG7Page() {
   const CustomTooltipBar = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm">
           <p className="font-semibold">{label}</p>
           {payload.map((p: any, i: number) => (
             <p key={i}>{p.name}: {p.value}</p>
@@ -52,7 +52,7 @@ export default function SDG7Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -77,11 +77,11 @@ export default function SDG7Page() {
 
       {/* Cards Ringkasan */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
+        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-sm">Keluarga Tanpa Listrik</h4>
           <p className="text-xl text-gray-900 font-bold text-yellow-400">{totals.tanpaListrik}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
+        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-sm">Pemanfaatan Waduk Untuk Listrik</h4>
           <p className="text-xl text-gray-900 font-bold text-yellow-400">{totals.waduk}</p>
         </div>
@@ -132,7 +132,7 @@ export default function SDG7Page() {
             }));
 
             return (
-              <div key={idx} className="glass-2 p-4 rounded-xl shadow">
+              <div key={idx} className="glass-2 p-4 rounded-xl border border-white/20 shadow">
                 <h4 className="text-md font-semibold mb-4 text-center">{key}</h4>
                 <div className="w-full h-72 flex justify-center">
                   <ResponsiveContainer>

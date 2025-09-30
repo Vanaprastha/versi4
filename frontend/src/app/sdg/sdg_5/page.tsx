@@ -34,7 +34,7 @@ export default function SDG5Page() {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm">
           <p className="font-semibold">{label}</p>
           {payload.map((p: any, i: number) => (
             <p key={i}>{p.name}: {p.value}</p>
@@ -66,23 +66,23 @@ export default function SDG5Page() {
 
       {/* Cards Ringkasan */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
+        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-sm">Kader KB/KIA</h4>
           <p className="text-xl text-gray-900 font-bold text-pink-400">{totals.kader}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
+        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-sm">PMI Perempuan</h4>
           <p className="text-xl text-gray-900 font-bold text-pink-400">{totals.pmi}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
+        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-sm">Calon PMI</h4>
           <p className="text-xl text-gray-900 font-bold text-pink-400">{totals.calonPmi}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
+        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-sm">Korban Pembunuhan</h4>
           <p className="text-xl text-gray-900 font-bold text-pink-400">{totals.pembunuhan}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl text-center shadow">
+        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
           <h4 className="font-semibold text-sm">Korban Bunuh Diri</h4>
           <p className="text-xl text-gray-900 font-bold text-pink-400">{totals.bunuhDiri}</p>
         </div>
@@ -114,7 +114,7 @@ export default function SDG5Page() {
         <h3 className="text-lg font-semibold mb-4">Indikator per Desa (Detail)</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {indikator.map((ind, idx) => (
-            <div key={idx} className="glass-2 p-4 rounded-xl shadow">
+            <div key={idx} className="glass-2 p-4 rounded-xl border border-white/20 shadow">
               <h4 className="text-md font-semibold mb-2 text-center">{ind.short}</h4>
               <div className="w-full h-72">
                 <ResponsiveContainer>

@@ -43,14 +43,14 @@ export default function UploadCSVPage() {
             className="text-sm"
           />
           <select value={mode} onChange={(e)=>setMode(e.target.value as any)}
-            className="bg-white/40 text-gray-800 border border-white/20 rounded-lg px-2 py-2 text-sm">
+            className="bg-white/40 text-gray-800 border border-white/20 rounded-lg border border-white/20 px-2 py-2 text-sm">
             <option value="predict">Prediksi</option>
             <option value="cluster">Clustering</option>
           </select>
           <button
             type="submit"
             disabled={!file || loading}
-            className="px-3 py-2 rounded-xl bg-white/10 hover:bg-white/20 transition disabled:opacity-50 text-sm"
+            className="px-3 py-2 rounded-xl border border-white/20 bg-white/10 hover:bg-white/20 transition disabled:opacity-50 text-sm"
           >
             {loading ? "Memproses..." : "Kirim"}
           </button>

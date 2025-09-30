@@ -83,12 +83,12 @@ export default function PenggaturanPage() {
       </p>
 
       {/* Status ringkas */}
-      <div className="glass-1 p-3 rounded-lg text-xs opacity-80">
+      <div className="glass-1 p-3 rounded-lg border border-white/20 text-xs opacity-80">
         <div>Aktif sekarang: <b>{appliedTheme === "light" ? "Light" : "Dark"}</b> • Background: <b>{appliedBg ? "Kustom" : "Default"}</b></div>
       </div>
 
       {/* Tema (pending) */}
-      <section className="glass-1 p-4 rounded-xl space-y-3">
+      <section className="glass-1 p-4 rounded-xl border border-white/20 space-y-3">
         <h2 className="font-medium">Tema</h2>
         <div className="flex items-center gap-4">
           <label className="inline-flex items-center gap-2 cursor-pointer">
@@ -115,12 +115,12 @@ export default function PenggaturanPage() {
       </section>
 
       {/* Background (pending) */}
-      <section className="glass-1 p-4 rounded-xl space-y-3">
+      <section className="glass-1 p-4 rounded-xl border border-white/20 space-y-3">
         <h2 className="font-medium">Background</h2>
         <div className="grid sm:grid-cols-3 gap-4">
           <button
             onClick={() => setPendingBg("")}
-            className="glass-2 rounded-lg p-3 text-left hover:opacity-90 transition"
+            className="glass-2 rounded-lg border border-white/20 p-3 text-left hover:opacity-90 transition"
           >
             <p className="font-medium">Default</p>
             <p className="text-xs opacity-70">Gunakan background bawaan</p>
@@ -128,13 +128,13 @@ export default function PenggaturanPage() {
 
           <button
             onClick={() => setPendingBg("https://images.unsplash.com/photo-1503264116251-35a269479413?w=1600")}
-            className="glass-2 rounded-lg p-3 text-left hover:opacity-90 transition"
+            className="glass-2 rounded-lg border border-white/20 p-3 text-left hover:opacity-90 transition"
           >
             <p className="font-medium">Pemandangan</p>
             <p className="text-xs opacity-70">gambar online (Unsplash)</p>
           </button>
 
-          <div className="glass-2 rounded-lg p-3">
+          <div className="glass-2 rounded-lg border border-white/20 p-3">
             <p className="font-medium mb-2">Upload Gambar Sendiri</p>
             <input ref={fileRef} type="file" accept="image/*" onChange={onUpload} />
             <p className="text-xs opacity-70 mt-1">Silahkan unggah file berformat .webp maksimal 400 kb</p>
@@ -144,7 +144,7 @@ export default function PenggaturanPage() {
         {pendingBg && (
           <div className="mt-4">
             <p className="text-sm mb-2">Pratinjau (belum diterapkan):</p>
-            <div className="rounded-lg overflow-hidden border border-white/10">
+            <div className="rounded-lg border border-white/20 overflow-hidden border border-white/10">
               <img src={pendingBg} alt="Preview" className="w-full max-h-64 object-cover" />
             </div>
           </div>
@@ -155,14 +155,14 @@ export default function PenggaturanPage() {
         <button
           id="btn-terapkan"
           onClick={applySettings}
-          className="px-4 py-2 rounded-lg bg-emerald-500/90 hover:bg-emerald-500 transition text-black font-medium"
+          className="px-4 py-2 rounded-lg border border-white/20 bg-emerald-500/90 hover:bg-emerald-500 transition text-black font-medium"
           aria-label="Terapkan pengaturan tema & background"
         >
           Terapkan
         </button>
         <button
           onClick={() => { setPendingTheme(appliedTheme); setPendingBg(appliedBg); }}
-          className="px-4 py-2 rounded-lg glass-2 hover:opacity-90 transition"
+          className="px-4 py-2 rounded-lg border border-white/20 glass-2 hover:opacity-90 transition"
         >
           Kembalikan ke setelan awal
         </button>

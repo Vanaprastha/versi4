@@ -32,12 +32,12 @@ export default function TentangPage() {
       <section className="glass-4 p-4 rounded-2xl">
         <h2 className="font-semibold mb-3 drop-shadow">Keunggulan Web App</h2>
         <ul className="grid sm:grid-cols-2 gap-3 text-sm text-neutral-200/90">
-          <li className="bg-white/35 p-3 rounded-xl border border-white/10">🎯 Fokus 17 SDGs: kartu berwarna sesuai palet resmi, tetap nyaman di background gelap.</li>
-          <li className="bg-white/35 p-3 rounded-xl border border-white/10">📈 Analitik & Prediksi: siap dihubungkan ke model ML (ARIMA/Prophet/LSTM).</li>
-          <li className="bg-white/35 p-3 rounded-xl border border-white/10">🧩 Clustering: segmentasi wilayah/indikator (K-Means/DBSCAN) dengan visual interaktif.</li>
-          <li className="bg-white/35 p-3 rounded-xl border border-white/10">🤖 Chatbot LLM: tanya jawab indikator, definisi, dan kebijakan dengan retrieval dokumen.</li>
-          <li className="bg-white/35 p-3 rounded-xl border border-white/10">⚡ Performa: Next.js + Tailwind, glassmorphism adaptif, responsive sampai mobile.</li>
-          <li className="bg-white/35 p-3 rounded-xl border border-white/10">🔐 Siap Produksi: mudah tambahkan auth, logging, dan koneksi ke DB (Supabase/PG).</li>
+          <li className="bg-white/35 p-3 rounded-xl border border-white/20 border border-white/10">🎯 Fokus 17 SDGs: kartu berwarna sesuai palet resmi, tetap nyaman di background gelap.</li>
+          <li className="bg-white/35 p-3 rounded-xl border border-white/20 border border-white/10">📈 Analitik & Prediksi: siap dihubungkan ke model ML (ARIMA/Prophet/LSTM).</li>
+          <li className="bg-white/35 p-3 rounded-xl border border-white/20 border border-white/10">🧩 Clustering: segmentasi wilayah/indikator (K-Means/DBSCAN) dengan visual interaktif.</li>
+          <li className="bg-white/35 p-3 rounded-xl border border-white/20 border border-white/10">🤖 Chatbot LLM: tanya jawab indikator, definisi, dan kebijakan dengan retrieval dokumen.</li>
+          <li className="bg-white/35 p-3 rounded-xl border border-white/20 border border-white/10">⚡ Performa: Next.js + Tailwind, glassmorphism adaptif, responsive sampai mobile.</li>
+          <li className="bg-white/35 p-3 rounded-xl border border-white/20 border border-white/10">🔐 Siap Produksi: mudah tambahkan auth, logging, dan koneksi ke DB (Supabase/PG).</li>
         </ul>
       </section>
     </div>
