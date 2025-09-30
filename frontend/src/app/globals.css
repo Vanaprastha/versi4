@@ -3,11 +3,11 @@
 :root {
   /* Theme variables (default: dark-ish) */
   --text-color: #e5e5e5;
-  --overlay: rgba(0,0,0,.45);
-  --glass-bg-1: rgba(0,0,0,0.40);
-  --glass-bg-2: rgba(0,0,0,0.50);
-  --glass-bg-3: rgba(0,0,0,0.55);
-  --glass-bg-4: rgba(0,0,0,0.60);
+  --overlay: rgba(0,0,0,.25);
+  --glass-bg-1: rgba(0,0,0,0.22);
+  --glass-bg-2: rgba(0,0,0,0.28);
+  --glass-bg-3: rgba(0,0,0,0.34);
+  --glass-bg-4: rgba(0,0,0,0.40);
   --glass-border: rgba(255,255,255,0.10);
   --bg-url: url("/assets/background.webp");
 }
@@ -15,19 +15,19 @@
 /* Light theme overrides (toggle with .theme-light on <html>) */
 html.theme-light {
   --text-color: #111111;
-  --overlay: rgba(255,255,255,.12);
-  --glass-bg-1: rgba(255,255,255,0.65);
-  --glass-bg-2: rgba(255,255,255,0.72);
-  --glass-bg-3: rgba(255,255,255,0.78);
-  --glass-bg-4: rgba(255,255,255,0.84);
+  --overlay: rgba(255,255,255,.06);
+  --glass-bg-1: rgba(255,255,255,0.35);
+  --glass-bg-2: rgba(255,255,255,0.42);
+  --glass-bg-3: rgba(255,255,255,0.50);
+  --glass-bg-4: rgba(255,255,255,0.58);
   --glass-border: rgba(0,0,0,0.10);
 }
 
 body { color: var(--text-color); }
-.glass-1 { background: var(--glass-bg-1); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); }
-.glass-2 { background: var(--glass-bg-2); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); }
-.glass-3 { background: var(--glass-bg-3); backdrop-filter: blur(20px); border: 1px solid var(--glass-border); }
-.glass-4 { background: var(--glass-bg-4); backdrop-filter: blur(24px); border: 1px solid var(--glass-border); }
+.glass-1 { background: var(--glass-bg-1); backdrop-filter: blur(6px); border: 1px solid var(--glass-border); }
+.glass-2 { background: var(--glass-bg-2); backdrop-filter: blur(8px); border: 1px solid var(--glass-border); }
+.glass-3 { background: var(--glass-bg-3); backdrop-filter: blur(10px); border: 1px solid var(--glass-border); }
+.glass-4 { background: var(--glass-bg-4); backdrop-filter: blur(12px); border: 1px solid var(--glass-border); }
 
 
 :root { color-scheme: dark; }
