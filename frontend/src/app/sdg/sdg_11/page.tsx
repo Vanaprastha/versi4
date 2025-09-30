@@ -38,7 +38,7 @@ export default function SDG11Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-white p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -100,10 +100,10 @@ export default function SDG11Page() {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-xl font-bold drop-shadow text-amber-500">
+        <h2 className="text-xl text-gray-900 font-bold drop-shadow text-amber-500">
           SDG 11: Kota dan Permukiman yang Berkelanjutan
         </h2>
-        <p className="text-sm text-gray-200">
+        <p className="text-sm text-gray-700">
           Visualisasi sesuai indikator asli pada dataset.
         </p>
       </div>
@@ -112,23 +112,23 @@ export default function SDG11Page() {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Permukiman Kumuh (ada)</h4>
-          <p className="text-xl font-bold text-amber-400">{summary.permukimanKumuh}</p>
+          <p className="text-xl text-gray-900 font-bold text-amber-400">{summary.permukimanKumuh}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Sistem Peringatan (ada)</h4>
-          <p className="text-xl font-bold text-amber-400">{summary.sistemPeringatan}</p>
+          <p className="text-xl text-gray-900 font-bold text-amber-400">{summary.sistemPeringatan}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Rambu Evakuasi (ada)</h4>
-          <p className="text-xl font-bold text-amber-400">{summary.rambuEvakuasi}</p>
+          <p className="text-xl text-gray-900 font-bold text-amber-400">{summary.rambuEvakuasi}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Desa Tangguh (termasuk)</h4>
-          <p className="text-xl font-bold text-amber-400">{summary.desaTangguh}</p>
+          <p className="text-xl text-gray-900 font-bold text-amber-400">{summary.desaTangguh}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Program Lingkungan (ada)</h4>
-          <p className="text-xl font-bold text-amber-400">{summary.programLingkungan}</p>
+          <p className="text-xl text-gray-900 font-bold text-amber-400">{summary.programLingkungan}</p>
         </div>
       </div>
 

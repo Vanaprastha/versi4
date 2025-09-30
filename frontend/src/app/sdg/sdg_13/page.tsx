@@ -47,7 +47,7 @@ export default function SDG13Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-white p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -111,10 +111,10 @@ export default function SDG13Page() {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-xl font-bold drop-shadow text-green-500">
+        <h2 className="text-xl text-gray-900 font-bold drop-shadow text-green-500">
           SDG 13: Penanganan Perubahan Iklim
         </h2>
-        <p className="text-sm text-gray-200">
+        <p className="text-sm text-gray-700">
           Visualisasi: Proklim, kejadian bencana, fasilitas peringatan dini, dan partisipasi simulasi bencana
         </p>
       </div>
@@ -123,23 +123,23 @@ export default function SDG13Page() {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Desa Proklim</h4>
-          <p className="text-xl font-bold text-green-400">{summary.proklim}</p>
+          <p className="text-xl text-gray-900 font-bold text-green-400">{summary.proklim}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Kejadian Banjir</h4>
-          <p className="text-xl font-bold text-green-400">{summary.banjir}</p>
+          <p className="text-xl text-gray-900 font-bold text-green-400">{summary.banjir}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Kejadian Kekeringan</h4>
-          <p className="text-xl font-bold text-green-400">{summary.kekeringan}</p>
+          <p className="text-xl text-gray-900 font-bold text-green-400">{summary.kekeringan}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Peringatan Dini</h4>
-          <p className="text-xl font-bold text-green-400">{summary.peringatan}</p>
+          <p className="text-xl text-gray-900 font-bold text-green-400">{summary.peringatan}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Simulasi Bencana</h4>
-          <p className="text-xl font-bold text-green-400">{summary.simulasi}</p>
+          <p className="text-xl text-gray-900 font-bold text-green-400">{summary.simulasi}</p>
         </div>
       </div>
 

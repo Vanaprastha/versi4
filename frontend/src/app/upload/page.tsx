@@ -33,7 +33,7 @@ export default function UploadCSVPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl font-semibold drop-shadow-md">Upload CSV untuk {mode === "predict" ? "Prediksi" : "Clustering"}</h1>
+      <h1 className="text-xl text-gray-900 font-semibold drop-shadow-md">Upload CSV untuk {mode === "predict" ? "Prediksi" : "Clustering"}</h1>
       <form onSubmit={handleSubmit} className="glass-4 p-4 rounded-2xl space-y-3">
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3">
           <input
@@ -43,7 +43,7 @@ export default function UploadCSVPage() {
             className="text-sm"
           />
           <select value={mode} onChange={(e)=>setMode(e.target.value as any)}
-            className="bg-black text-white border border-white/20 rounded-lg px-2 py-2 text-sm">
+            className="bg-white/40 text-gray-800 border border-white/20 rounded-lg px-2 py-2 text-sm">
             <option value="predict">Prediksi</option>
             <option value="cluster">Clustering</option>
           </select>

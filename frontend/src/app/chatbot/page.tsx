@@ -53,7 +53,7 @@ export default function ChatbotPage() {
 
   return (
     <div className="p-6 max-w-3xl mx-auto space-y-6">
-      <h1 className="text-3xl font-bold text-center text-blue-700">
+      <h1 className="text-3xl text-gray-900 font-bold text-center text-blue-700">
         💬 Chatbot SDGs
       </h1>
       <p className="text-center text-gray-600">
@@ -72,7 +72,7 @@ export default function ChatbotPage() {
             <div
               className={`px-4 py-2 rounded-2xl max-w-lg break-words prose prose-sm ${
                 m.role === "user"
-                  ? "bg-blue-600 text-white self-end"
+                  ? "bg-blue-600 text-gray-800 self-end"
                   : "bg-green-100 text-green-900"
               }`}
             >
@@ -101,7 +101,7 @@ export default function ChatbotPage() {
         <button
           onClick={send}
           disabled={loading}
-          className="px-6 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition text-white font-medium shadow disabled:opacity-50"
+          className="px-6 py-2 rounded-xl bg-blue-600 hover:bg-blue-700 transition text-gray-800 font-medium shadow disabled:opacity-50"
         >
           Kirim
         </button>

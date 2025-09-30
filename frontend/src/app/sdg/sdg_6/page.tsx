@@ -48,7 +48,7 @@ export default function SDG6Page() {
   const CustomTooltipBar = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white/80 text-white p-2 rounded-lg text-sm">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm">
           <p className="font-semibold">{label}</p>
           {payload.map((p: any, i: number) => (
             <p key={i}>
@@ -71,7 +71,7 @@ export default function SDG6Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-white p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -89,10 +89,10 @@ export default function SDG6Page() {
     <div className="p-6 space-y-6">
       {/* Judul */}
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-xl font-bold drop-shadow text-cyan-500">
+        <h2 className="text-xl text-gray-900 font-bold drop-shadow text-cyan-500">
           SDG 6: Air Bersih dan Sanitasi Layak
         </h2>
-        <p className="text-sm text-gray-200">
+        <p className="text-sm text-gray-700">
           Visualisasi: akses air minum aman, sanitasi, pencemaran limbah sungai, dan lembaga pengelolaan air
         </p>
       </div>
@@ -101,23 +101,23 @@ export default function SDG6Page() {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Air Minum Aman</h4>
-          <p className="text-xl font-bold text-cyan-400">{totals.airAman}</p>
+          <p className="text-xl text-gray-900 font-bold text-cyan-400">{totals.airAman}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Air Minum Tidak Aman</h4>
-          <p className="text-xl font-bold text-cyan-400">{totals.airTidak}</p>
+          <p className="text-xl text-gray-900 font-bold text-cyan-400">{totals.airTidak}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Jamban Sendiri</h4>
-          <p className="text-xl font-bold text-cyan-400">{totals.jambanSendiri}</p>
+          <p className="text-xl text-gray-900 font-bold text-cyan-400">{totals.jambanSendiri}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Pencemaran Ada</h4>
-          <p className="text-xl font-bold text-cyan-400">{totals.pencemaranAda}</p>
+          <p className="text-xl text-gray-900 font-bold text-cyan-400">{totals.pencemaranAda}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Pencemaran Tidak Ada</h4>
-          <p className="text-xl font-bold text-cyan-400">{totals.pencemaranTidak}</p>
+          <p className="text-xl text-gray-900 font-bold text-cyan-400">{totals.pencemaranTidak}</p>
         </div>
       </div>
 

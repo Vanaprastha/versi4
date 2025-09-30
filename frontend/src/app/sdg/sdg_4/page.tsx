@@ -23,7 +23,7 @@ export default function SDG4Page() {
   const CustomTooltipBar = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white/80 text-white p-2 rounded-lg text-sm">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm">
           <p className="font-semibold">{label}</p>
           {payload.map((p: any, i: number) => (
             <p key={i}>{p.name}: {p.value}</p>
@@ -44,7 +44,7 @@ export default function SDG4Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-white p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -59,10 +59,10 @@ export default function SDG4Page() {
   return (
     <div className="p-6 space-y-6">
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-xl font-bold drop-shadow text-blue-500">
+        <h2 className="text-xl text-gray-900 font-bold drop-shadow text-blue-500">
           SDG 4: Pendidikan Berkualitas
         </h2>
-        <p className="text-sm text-gray-200">
+        <p className="text-sm text-gray-700">
           Visualisasi: Akses pendidikan dasar, PAUD, program keaksaraan, paket A/B/C, dan lembaga keterampilan komputer
         </p>
       </div>

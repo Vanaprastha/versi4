@@ -32,7 +32,7 @@ export default function SDG17Page() {
       const desaList = data.filter(row => String(row[key]) === name).map(row => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-white p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{name} ({value})</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -90,10 +90,10 @@ export default function SDG17Page() {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-xl font-bold drop-shadow text-purple-500">
+        <h2 className="text-xl text-gray-900 font-bold drop-shadow text-purple-500">
           SDG 17: Kemitraan untuk Mencapai Tujuan
         </h2>
-        <p className="text-sm text-gray-200">
+        <p className="text-sm text-gray-700">
           Visualisasi: Kerjasama antar desa, pihak ketiga, Proklim, perhutanan sosial, dan siaran swasta
         </p>
       </div>
@@ -102,23 +102,23 @@ export default function SDG17Page() {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Kerjasama Antar Desa</h4>
-          <p className="text-xl font-bold text-purple-400">{summary.kerjasamaAntar}</p>
+          <p className="text-xl text-gray-900 font-bold text-purple-400">{summary.kerjasamaAntar}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Kerjasama dgn Pihak Ketiga</h4>
-          <p className="text-xl font-bold text-purple-400">{summary.kerjasamaPihak}</p>
+          <p className="text-xl text-gray-900 font-bold text-purple-400">{summary.kerjasamaPihak}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Program Proklim</h4>
-          <p className="text-xl font-bold text-purple-400">{summary.proklim}</p>
+          <p className="text-xl text-gray-900 font-bold text-purple-400">{summary.proklim}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Perhutanan Sosial</h4>
-          <p className="text-xl font-bold text-purple-400">{summary.perhutanan}</p>
+          <p className="text-xl text-gray-900 font-bold text-purple-400">{summary.perhutanan}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Akses Siaran Swasta</h4>
-          <p className="text-xl font-bold text-purple-400">{summary.siaran}</p>
+          <p className="text-xl text-gray-900 font-bold text-purple-400">{summary.siaran}</p>
         </div>
       </div>
 

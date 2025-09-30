@@ -10,7 +10,7 @@ const team = [
 export default function TentangPage() {
   return (
     <div className="space-y-6">
-      <h1 className="text-xl font-semibold drop-shadow-md">Tentang</h1>
+      <h1 className="text-xl text-gray-900 font-semibold drop-shadow-md">Tentang</h1>
 
       <section className="glass-4 p-4 rounded-2xl space-y-2 text-sm text-neutral-200/90 leading-relaxed">
         <p><b>Dashboard SDGs Pemda</b> adalah web app untuk memantau capaian indikator SDGs daerah, lengkap dengan modul prediksi, clustering, dan chatbot LLM.</p>

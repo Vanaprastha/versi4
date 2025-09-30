@@ -36,7 +36,7 @@ export default function SDG16Page() {
   const CustomTooltipBar = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white/80 text-white p-2 rounded-lg text-sm">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm">
           <p className="font-semibold">{label}</p>
           {payload.map((p: any, i: number) => (
             <p key={i}>{p.name}: {p.value}</p>
@@ -57,7 +57,7 @@ export default function SDG16Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-white p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -87,10 +87,10 @@ export default function SDG16Page() {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-xl font-bold drop-shadow text-blue-500">
+        <h2 className="text-xl text-gray-900 font-bold drop-shadow text-blue-500">
           SDG 16: Perdamaian, Keadilan, dan Kelembagaan yang Tangguh
         </h2>
-        <p className="text-sm text-gray-200">
+        <p className="text-sm text-gray-700">
           Visualisasi: Inisiatif keamanan, regu keamanan, pos keamanan, lembaga adat, dan konflik
         </p>
       </div>
@@ -99,23 +99,23 @@ export default function SDG16Page() {
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Inisiatif Keamanan</h4>
-          <p className="text-xl font-bold text-blue-400">{totals.inisiatif}</p>
+          <p className="text-xl text-gray-900 font-bold text-blue-400">{totals.inisiatif}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Regu Keamanan</h4>
-          <p className="text-xl font-bold text-blue-400">{totals.regu}</p>
+          <p className="text-xl text-gray-900 font-bold text-blue-400">{totals.regu}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Pos Keamanan</h4>
-          <p className="text-xl font-bold text-blue-400">{totals.pos}</p>
+          <p className="text-xl text-gray-900 font-bold text-blue-400">{totals.pos}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Lembaga Adat</h4>
-          <p className="text-xl font-bold text-blue-400">{totals.lembaga}</p>
+          <p className="text-xl text-gray-900 font-bold text-blue-400">{totals.lembaga}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Kejadian Konflik</h4>
-          <p className="text-xl font-bold text-blue-400">{totals.konflik}</p>
+          <p className="text-xl text-gray-900 font-bold text-blue-400">{totals.konflik}</p>
         </div>
       </div>
 

@@ -45,7 +45,7 @@ export default function SDGCard({ goalNo, title, info }: Props) {
       style={{ background: bg, borderColor: border }}
     >
       {/* Ikon di tengah kanan */}
-      <div className="absolute top-1/2 right-3 -translate-y-1/2 text-white/90">
+      <div className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-800/90">
         {icon}
       </div>
 
@@ -53,7 +53,7 @@ export default function SDGCard({ goalNo, title, info }: Props) {
         SDG {goalNo}: {title}
       </h3>
 
-      <p className="text-sm text-gray-200 pr-8">
+      <p className="text-sm text-gray-700 pr-8">
         {info}
       </p>
     </div>

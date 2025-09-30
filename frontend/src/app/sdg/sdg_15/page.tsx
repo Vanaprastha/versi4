@@ -41,7 +41,7 @@ export default function SDG15Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-white p-2 rounded-lg text-sm max-w-xs">
+        <div className="bg-white/80 text-gray-800 p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -105,10 +105,10 @@ export default function SDG15Page() {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-xl font-bold drop-shadow text-green-500">
+        <h2 className="text-xl text-gray-900 font-bold drop-shadow text-green-500">
           SDG 15: Ekosistem Daratan
         </h2>
-        <p className="text-sm text-gray-200">
+        <p className="text-sm text-gray-700">
           Visualisasi: kondisi desa terhadap kawasan hutan, kebakaran hutan, penanaman pohon, dan program perhutanan
         </p>
       </div>
@@ -117,15 +117,15 @@ export default function SDG15Page() {
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Desa di Tepi Hutan</h4>
-          <p className="text-xl font-bold text-green-400">{summary.tepiHutan}</p>
+          <p className="text-xl text-gray-900 font-bold text-green-400">{summary.tepiHutan}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Desa di Luar Hutan</h4>
-          <p className="text-xl font-bold text-green-400">{summary.luarHutan}</p>
+          <p className="text-xl text-gray-900 font-bold text-green-400">{summary.luarHutan}</p>
         </div>
         <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Ada Penanaman Pohon</h4>
-          <p className="text-xl font-bold text-green-400">{summary.adaPenanaman}</p>
+          <p className="text-xl text-gray-900 font-bold text-green-400">{summary.adaPenanaman}</p>
         </div>
       </div>
 
