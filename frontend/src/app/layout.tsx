@@ -13,22 +13,21 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="id" suppressHydrationWarning className="theme-light" style={{}}>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-      
-        <script dangerouslySetInnerHTML={{__html: `
+
+        {/* 🔥 Paksa Light theme tanpa membaca localStorage */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
 (function(){
   try {
-    var theme = localStorage.getItem('sdgs_theme') || 'dark';
-    var bg = localStorage.getItem('sdgs_bg');
     var html = document.documentElement;
     html.classList.remove('theme-light','theme-dark');
-    html.classList.add(theme === 'light' ? 'theme-light' : 'theme-dark');
-    if (bg) {
-      try { html.style.setProperty('--bg-url', 'url(' + JSON.parse(bg) + ')'); }
-      catch(e){ html.style.setProperty('--bg-url', 'url(' + bg + ')'); }
-    }
+    html.classList.add('theme-light'); // selalu Light
   } catch(e) {}
 })();
-        `}} />
+            `,
+          }}
+        />
       </head>
       <body className="min-h-screen bg-dashboard relative text-neutral-100">
         <div className="max-w-[1440px] mx-auto p-4">
@@ -44,3 +43,4 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     </html>
   );
 }
+
