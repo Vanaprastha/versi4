@@ -43,7 +43,7 @@ export default function SDG9Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm max-w-xs">
+        <div className="bg-black/80 text-white p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -69,7 +69,7 @@ export default function SDG9Page() {
     }));
 
     return (
-      <div className="glass-2 p-4 rounded-xl border border-white/20 shadow">
+      <div className="glass-2 p-4 rounded-xl shadow">
         <h4 className="text-md font-semibold mb-4 text-center">{title}</h4>
         <div className="w-full h-72 flex justify-center">
           <ResponsiveContainer>
@@ -105,35 +105,35 @@ export default function SDG9Page() {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-xl text-gray-900 font-bold drop-shadow text-purple-500">
+        <h2 className="text-xl font-bold drop-shadow text-purple-500">
           SDG 9: Industri, Inovasi, dan Infrastruktur
         </h2>
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-gray-200">
           Infrastruktur desa: kondisi jalan utama, akses jalan pertanian, sinyal internet, dan fasilitas internet desa.
         </p>
       </div>
 
       {/* Cards Ringkasan */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
+        <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Jalan Aspal/Beton</h4>
-          <p className="text-xl text-gray-900 font-bold text-purple-400">{summary.jalanAspal}</p>
+          <p className="text-xl font-bold text-purple-400">{summary.jalanAspal}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
+        <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Sinyal 4G/5G</h4>
-          <p className="text-xl text-gray-900 font-bold text-purple-400">{summary.sinyal4G}</p>
+          <p className="text-xl font-bold text-purple-400">{summary.sinyal4G}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
+        <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Internet Kantor Desa</h4>
-          <p className="text-xl text-gray-900 font-bold text-purple-400">{summary.internetKantor}</p>
+          <p className="text-xl font-bold text-purple-400">{summary.internetKantor}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
+        <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Akses Pertanian Sepanjang Tahun</h4>
-          <p className="text-xl text-gray-900 font-bold text-purple-400">{summary.aksesSepanjang}</p>
+          <p className="text-xl font-bold text-purple-400">{summary.aksesSepanjang}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
+        <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Total Desa</h4>
-          <p className="text-xl text-gray-900 font-bold text-purple-400">{data.length}</p>
+          <p className="text-xl font-bold text-purple-400">{data.length}</p>
         </div>
       </div>
 

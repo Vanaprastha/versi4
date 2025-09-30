@@ -27,7 +27,7 @@ export default function Dashboard() {
   return (
     <div className="space-y-6">
       <header className="glass-2 p-4 rounded-2xl sticky top-0 z-10">
-        <h1 className="text-xl text-gray-900 font-semibold drop-shadow-md">Ringkasan SDGs</h1>
+        <h1 className="text-xl font-semibold drop-shadow-md">Ringkasan SDGs</h1>
         <p className="text-sm text-neutral-200/80">
           Pilih wilayah & indikator untuk melihat perkembangan.
         </p>

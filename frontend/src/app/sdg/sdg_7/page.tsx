@@ -31,7 +31,7 @@ export default function SDG7Page() {
   const CustomTooltipBar = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm">
+        <div className="bg-black/80 text-white p-2 rounded-lg text-sm">
           <p className="font-semibold">{label}</p>
           {payload.map((p: any, i: number) => (
             <p key={i}>{p.name}: {p.value}</p>
@@ -52,7 +52,7 @@ export default function SDG7Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm max-w-xs">
+        <div className="bg-black/80 text-white p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -67,23 +67,23 @@ export default function SDG7Page() {
   return (
     <div className="p-6 space-y-6">
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-xl text-gray-900 font-bold drop-shadow text-yellow-500">
+        <h2 className="text-xl font-bold drop-shadow text-yellow-500">
           SDG 7: Energi Bersih dan Terjangkau
         </h2>
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-gray-200">
           Visualisasi: Keluarga tanpa listrik, energi terbarukan, biogas, sarana energi, dan Pemanfaatan Waduk Untuk Listrik
         </p>
       </div>
 
       {/* Cards Ringkasan */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
+        <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Keluarga Tanpa Listrik</h4>
-          <p className="text-xl text-gray-900 font-bold text-yellow-400">{totals.tanpaListrik}</p>
+          <p className="text-xl font-bold text-yellow-400">{totals.tanpaListrik}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
+        <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Pemanfaatan Waduk Untuk Listrik</h4>
-          <p className="text-xl text-gray-900 font-bold text-yellow-400">{totals.waduk}</p>
+          <p className="text-xl font-bold text-yellow-400">{totals.waduk}</p>
         </div>
       </div>
 
@@ -132,7 +132,7 @@ export default function SDG7Page() {
             }));
 
             return (
-              <div key={idx} className="glass-2 p-4 rounded-xl border border-white/20 shadow">
+              <div key={idx} className="glass-2 p-4 rounded-xl shadow">
                 <h4 className="text-md font-semibold mb-4 text-center">{key}</h4>
                 <div className="w-full h-72 flex justify-center">
                   <ResponsiveContainer>

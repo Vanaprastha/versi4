@@ -9,14 +9,14 @@ export default function PrediksiPage() {
 
   return (
     <div className="space-y-4">
-      <h1 className="text-xl text-gray-900 font-semibold drop-shadow-md">
+      <h1 className="text-xl font-semibold drop-shadow-md">
         Prediksi Indikator
       </h1>
 
       <div className="glass-4 p-4 rounded-2xl grid md:grid-cols-3 gap-4">
         {/* Dropdown indikator */}
         <select
-          className="bg-white/40 text-gray-800 border border-white/20 rounded-lg border border-white/20 px-2 py-2 text-sm"
+          className="bg-black text-white border border-white/20 rounded-lg px-2 py-2 text-sm"
           value={indikator}
           onChange={(e) => setIndikator(e.target.value)}
         >
@@ -28,7 +28,7 @@ export default function PrediksiPage() {
         {/* Input wilayah */}
         <input
           type="text"
-          className="bg-white/40 text-gray-800 border border-white/20 rounded-lg border border-white/20 px-2 py-2 text-sm"
+          className="bg-black text-white border border-white/20 rounded-lg px-2 py-2 text-sm"
           value={wilayah}
           onChange={(e) => setWilayah(e.target.value)}
           placeholder="Wilayah"
@@ -37,7 +37,7 @@ export default function PrediksiPage() {
         {/* Input tahun */}
         <input
           type="number"
-          className="bg-white/40 text-gray-800 border border-white/20 rounded-lg border border-white/20 px-2 py-2 text-sm"
+          className="bg-black text-white border border-white/20 rounded-lg px-2 py-2 text-sm"
           value={tahun}
           onChange={(e) => setTahun(+e.target.value)}
         />

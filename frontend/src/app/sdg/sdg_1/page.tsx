@@ -46,7 +46,7 @@ export default function SDG1Page() {
   const CustomTooltipSKTM = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm">
+        <div className="bg-black/80 text-white p-2 rounded-lg text-sm">
           <p className="font-semibold">{label}</p>
           <p>Jumlah SKTM: {payload[0].value}</p>
         </div>
@@ -70,7 +70,7 @@ export default function SDG1Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm max-w-xs">
+        <div className="bg-black/80 text-white p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -86,10 +86,10 @@ export default function SDG1Page() {
     <div className="space-y-6 p-6">
       {/* Header */}
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-xl text-gray-900 font-bold drop-shadow text-red-500">
+        <h2 className="text-xl font-bold drop-shadow text-red-500">
           SDG 1: Tanpa Kemiskinan
         </h2>
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-gray-200">
           Informasi : Jumlah SKTM diterbitkan, status keberadaan layanan stunting
         </p>
       </div>
@@ -105,7 +105,7 @@ export default function SDG1Page() {
           });
 
           return (
-            <div key={idx} className="glass-2 p-4 rounded-xl border border-white/20 shadow text-center">
+            <div key={idx} className="glass-2 p-4 rounded-xl shadow text-center">
               <h4 className="font-semibold text-sm mb-2">{key}</h4>
               <div className="flex justify-around">
                 <div>
@@ -124,9 +124,9 @@ export default function SDG1Page() {
 
       {/* Card Ringkasan Total SKTM (dipindah ke bawah) */}
       <div className="grid grid-cols-1">
-        <div className="glass-2 p-6 rounded-xl border border-white/20 text-center shadow col-span-1 md:col-span-3">
+        <div className="glass-2 p-6 rounded-xl text-center shadow col-span-1 md:col-span-3">
           <h4 className="font-semibold text-lg mb-2">Total SKTM</h4>
-          <p className="text-3xl text-gray-900 font-extrabold text-red-400">{totalSKTM}</p>
+          <p className="text-3xl font-extrabold text-red-400">{totalSKTM}</p>
         </div>
       </div>
 
@@ -172,7 +172,7 @@ export default function SDG1Page() {
               { name: "Tidak Ada", value: counts["tidak ada"], key },
             ];
             return (
-              <div key={idx} className="glass-2 p-4 rounded-xl border border-white/20 shadow">
+              <div key={idx} className="glass-2 p-4 rounded-xl shadow">
                 <h4 className="text-md font-semibold mb-2 text-center">{key}</h4>
                 <div className="w-full h-64 flex justify-center">
                   <ResponsiveContainer>

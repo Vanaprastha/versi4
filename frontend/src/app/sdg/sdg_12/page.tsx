@@ -43,7 +43,7 @@ export default function SDG12Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm max-w-xs">
+        <div className="bg-black/80 text-white p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -71,7 +71,7 @@ export default function SDG12Page() {
     }));
 
     return (
-      <div className="glass-2 p-4 rounded-xl border border-white/20 shadow">
+      <div className="glass-2 p-4 rounded-xl shadow">
         <h4 className="text-md font-semibold mb-4 text-center">{key}</h4>
         <div className="w-full h-72 flex justify-center">
           <ResponsiveContainer>
@@ -107,31 +107,31 @@ export default function SDG12Page() {
     <div className="p-6 space-y-6">
       {/* Header */}
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-xl text-gray-900 font-bold drop-shadow text-yellow-500">
+        <h2 className="text-xl font-bold drop-shadow text-yellow-500">
           SDG 12: Konsumsi dan Produksi yang Bertanggung Jawab
         </h2>
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-gray-200">
           Visualisasi: Daur ulang sampah, bank sampah, pemilahan, tempat buang sampah, dan frekuensi pengangkutan
         </p>
       </div>
 
       {/* Cards Ringkasan */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
+        <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Daur Ulang Sampah (Ada)</h4>
-          <p className="text-xl text-gray-900 font-bold text-yellow-400">{summary.daurUlang}</p>
+          <p className="text-xl font-bold text-yellow-400">{summary.daurUlang}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
+        <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Bank Sampah (Ada)</h4>
-          <p className="text-xl text-gray-900 font-bold text-yellow-400">{summary.bankSampah}</p>
+          <p className="text-xl font-bold text-yellow-400">{summary.bankSampah}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
+        <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Pemilahan Sampah</h4>
-          <p className="text-xl text-gray-900 font-bold text-yellow-400">{summary.pemilahan}</p>
+          <p className="text-xl font-bold text-yellow-400">{summary.pemilahan}</p>
         </div>
-        <div className="glass-2 p-4 rounded-xl border border-white/20 text-center shadow">
+        <div className="glass-2 p-4 rounded-xl text-center shadow">
           <h4 className="font-semibold text-sm">Pengangkutan (Ada)</h4>
-          <p className="text-xl text-gray-900 font-bold text-yellow-400">{summary.pengangkutan}</p>
+          <p className="text-xl font-bold text-yellow-400">{summary.pengangkutan}</p>
         </div>
       </div>
 

@@ -44,7 +44,7 @@ export default function SDG2Page() {
   const CustomTooltipBar = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm">
+        <div className="bg-black/80 text-white p-2 rounded-lg text-sm">
           <p className="font-semibold">{label}</p>
           {payload.map((p: any, i: number) => (
             <p key={i}>{p.name}: {p.value}</p>
@@ -65,7 +65,7 @@ export default function SDG2Page() {
         .map((row) => row.nama_desa);
 
       return (
-        <div className="bg-white/80 text-gray-800 p-2 rounded-lg border border-white/20 text-sm max-w-xs">
+        <div className="bg-black/80 text-white p-2 rounded-lg text-sm max-w-xs">
           <p className="font-semibold">{category}</p>
           <p className="italic">Desa:</p>
           <ul className="list-disc list-inside">
@@ -81,23 +81,23 @@ export default function SDG2Page() {
     <div className="space-y-6 p-6">
       {/* Header */}
       <div className="glass-4 p-6 rounded-2xl shadow-lg">
-        <h2 className="text-xl text-gray-900 font-bold drop-shadow text-yellow-500">
+        <h2 className="text-xl font-bold drop-shadow text-yellow-500">
           SDG 2: Tanpa Kelaparan
         </h2>
-        <p className="text-sm text-gray-700">
+        <p className="text-sm text-gray-200">
           Informasi: Gizi Buruk, Luas Areal Pertanian Terdampak, Kerawanan Pangan, Pupuk Organik, Akses Jalan Pertanian
         </p>
       </div>
 
       {/* Cards Ringkasan */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div className="glass-2 p-6 rounded-xl border border-white/20 text-center shadow">
+        <div className="glass-2 p-6 rounded-xl text-center shadow">
           <h4 className="font-semibold text-lg mb-2">Total Penderita Gizi Buruk</h4>
-          <p className="text-3xl text-gray-900 font-extrabold text-red-400">{totalGiziBuruk}</p>
+          <p className="text-3xl font-extrabold text-red-400">{totalGiziBuruk}</p>
         </div>
-        <div className="glass-2 p-6 rounded-xl border border-white/20 text-center shadow">
+        <div className="glass-2 p-6 rounded-xl text-center shadow">
           <h4 className="font-semibold text-lg mb-2">Total Luas Areal Pertanian Terdampak</h4>
-          <p className="text-3xl text-gray-900 font-extrabold text-blue-400">{totalLuasPertanian}</p>
+          <p className="text-3xl font-extrabold text-blue-400">{totalLuasPertanian}</p>
         </div>
       </div>
 
@@ -148,7 +148,7 @@ export default function SDG2Page() {
             const pieData = Object.entries(counts).map(([name, value]) => ({ name, value, key }));
 
             return (
-              <div key={idx} className="glass-2 p-4 rounded-xl border border-white/20 shadow">
+              <div key={idx} className="glass-2 p-4 rounded-xl shadow">
                 <h4 className="text-md font-semibold mb-2 text-center">{key}</h4>
                 <div className="w-full h-64 flex justify-center">
                   <ResponsiveContainer>
