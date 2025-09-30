@@ -52,16 +52,16 @@ export default function ChatbotPage() {
   };
 
   return (
-    <div className="p-6 max-w-5xl mx-auto space-y-6">
+    <div className="p-6 max-w-5xl mx-auto space-y-6 text-white">
       <h1 className="text-3xl font-bold text-center text-emerald-700 drop-shadow-md">
         💬 Chatbot SDGs
       </h1>
-      <p className="text-center text-gray-700">
-        Tanyakan apa saja tentang data <span className="font-semibold text-blue-600">SDGs 1–17</span>.
+      <p className="text-center">
+        Tanyakan apa saja tentang data <span className="font-semibold">SDGs 1–17</span>.
       </p>
 
       {/* Chat Window */}
-      <div className="glass-4 border rounded-2xl shadow-lg p-6 h-[70vh] overflow-y-auto bg-gradient-to-b from-white/95 to-blue-50/70 backdrop-blur-md space-y-4">
+      <div className="glass-4 border rounded-2xl shadow-lg p-6 h-[70vh] overflow-y-auto bg-gradient-to-b from-white/10 to-blue-900/30 backdrop-blur-md space-y-4">
         <AnimatePresence>
           {logs.map((m, i) => (
             <motion.div
@@ -98,7 +98,7 @@ export default function ChatbotPage() {
         </AnimatePresence>
 
         {loading && (
-          <div className="text-emerald-600 italic animate-pulse">
+          <div className="italic animate-pulse text-emerald-300">
             Asisten mengetik…
           </div>
         )}
@@ -112,7 +112,7 @@ export default function ChatbotPage() {
           onChange={(e) => setQ(e.target.value)}
           onKeyDown={onKeyDown}
           placeholder="Contoh: Desa mana yang punya angka tertinggi di SDG 1?"
-          className="flex-1 border rounded-xl px-4 py-3 shadow focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white/70 text-gray-800 placeholder-gray-400"
+          className="flex-1 border rounded-xl px-4 py-3 shadow focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white/20 text-white placeholder-gray-300"
         />
         <button
           onClick={send}
@@ -123,10 +123,10 @@ export default function ChatbotPage() {
         </button>
       </div>
 
-      <p className="text-sm text-gray-600 text-center">
+      <p className="text-sm text-center">
         💡 Tips: Sertakan nomor SDG di pertanyaanmu <br /> (mis.{" "}
-        <span className="font-semibold text-blue-600">"SDG 3"</span> atau{" "}
-        <span className="font-semibold text-emerald-700">"SDG 1 dan 2"</span>) agar bot tahu tabel mana yang harus diambil.
+        <span className="font-semibold">"SDG 3"</span> atau{" "}
+        <span className="font-semibold">"SDG 1 dan 2"</span>) agar bot tahu tabel mana yang harus diambil.
       </p>
     </div>
   );
