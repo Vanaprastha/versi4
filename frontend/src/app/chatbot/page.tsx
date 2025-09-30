@@ -9,10 +9,12 @@ export default function ChatbotPage() {
   const [q, setQ] = useState("");
   const [loading, setLoading] = useState(false);
   const [logs, setLogs] = useState<Msg[]>([
-    { role: "assistant", text: "Halo! Saya chatbot SDGs. Tanyakan apa saja tentang data SDGs 1–17. 🚀" },
+    {
+      role: "assistant",
+      text: "🌱 Halo! Saya chatbot SDGs. Tanyakan apa saja tentang data SDGs 1–17. 🚀",
+    },
   ]);
 
-  // Ref untuk auto-scroll
   const bottomRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
@@ -36,7 +38,10 @@ export default function ChatbotPage() {
       const text = data?.answer || data?.error || "Maaf, terjadi kesalahan.";
       setLogs((l) => [...l, { role: "assistant", text }]);
     } catch {
-      setLogs((l) => [...l, { role: "assistant", text: "Gagal menghubungi server." }]);
+      setLogs((l) => [
+        ...l,
+        { role: "assistant", text: "⚠️ Gagal menghubungi server." },
+      ]);
     } finally {
       setLoading(false);
     }
@@ -48,11 +53,11 @@ export default function ChatbotPage() {
 
   return (
     <div className="p-6 max-w-5xl mx-auto space-y-6">
-      <h1 className="text-3xl font-bold text-center text-blue-700 drop-shadow-md">
+      <h1 className="text-3xl font-bold text-center text-emerald-700 drop-shadow-md">
         💬 Chatbot SDGs
       </h1>
-      <p className="text-center text-gray-600">
-        Tanyakan apa saja tentang data SDGs 1–17.
+      <p className="text-center text-gray-700">
+        Tanyakan apa saja tentang data <span className="font-semibold text-blue-600">SDGs 1–17</span>.
       </p>
 
       {/* Chat Window */}
@@ -65,16 +70,26 @@ export default function ChatbotPage() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: -10, scale: 0.95 }}
               transition={{ duration: 0.3 }}
-              className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
+              className={`flex ${
+                m.role === "user" ? "justify-end" : "justify-start"
+              }`}
             >
               <div
                 className={`px-5 py-3 rounded-2xl break-words prose prose-sm shadow ${
                   m.role === "user"
-                    ? "bg-blue-600 text-white self-end rounded-br-none"
+                    ? "bg-blue-600 text-white rounded-br-none"
                     : "bg-green-100 text-green-900 rounded-bl-none"
                 } w-full sm:w-4/5 md:w-3/4 lg:w-2/3`}
               >
-                <b>{m.role === "user" ? "Kamu" : "Asisten"}:</b>{" "}
+                <b
+                  className={
+                    m.role === "user"
+                      ? "text-blue-100"
+                      : "text-emerald-700"
+                  }
+                >
+                  {m.role === "user" ? "Kamu" : "Asisten"}:
+                </b>{" "}
                 {/* @ts-expect-error react-markdown typing issue */}
                 <ReactMarkdown>{m.text}</ReactMarkdown>
               </div>
@@ -83,9 +98,10 @@ export default function ChatbotPage() {
         </AnimatePresence>
 
         {loading && (
-          <div className="text-gray-500 italic animate-pulse">Asisten mengetik…</div>
+          <div className="text-emerald-600 italic animate-pulse">
+            Asisten mengetik…
+          </div>
         )}
-        {/* Auto-scroll anchor */}
         <div ref={bottomRef} />
       </div>
 
@@ -96,12 +112,12 @@ export default function ChatbotPage() {
           onChange={(e) => setQ(e.target.value)}
           onKeyDown={onKeyDown}
           placeholder="Contoh: Desa mana yang punya angka tertinggi di SDG 1?"
-          className="flex-1 border rounded-xl px-4 py-3 shadow focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/70 backdrop-blur-md"
+          className="flex-1 border rounded-xl px-4 py-3 shadow focus:outline-none focus:ring-2 focus:ring-emerald-500 bg-white/70 text-gray-800 placeholder-gray-400"
         />
         <button
           onClick={send}
           disabled={loading}
-          className="px-6 py-3 rounded-xl bg-emerald-600/80 hover:bg-emerald-600 transition text-white font-medium shadow disabled:opacity-50"
+          className="px-6 py-3 rounded-xl bg-emerald-600 hover:bg-emerald-700 transition text-white font-medium shadow disabled:opacity-50"
         >
           Kirim
         </button>
@@ -109,8 +125,8 @@ export default function ChatbotPage() {
 
       <p className="text-sm text-gray-600 text-center">
         💡 Tips: Sertakan nomor SDG di pertanyaanmu <br /> (mis.{" "}
-        <span className="font-semibold">"SDG 3"</span> atau{" "}
-        <span className="font-semibold">"SDG 1 dan 2"</span>) agar bot tahu tabel mana yang harus diambil.
+        <span className="font-semibold text-blue-600">"SDG 3"</span> atau{" "}
+        <span className="font-semibold text-emerald-700">"SDG 1 dan 2"</span>) agar bot tahu tabel mana yang harus diambil.
       </p>
     </div>
   );
