@@ -44,7 +44,7 @@ export async function POST(req: NextRequest) {
       "Instruksi:",
       "- Jelaskan jawaban berdasarkan data di atas.",
       "- Gunakan nama kolom yang sudah jelas (bukan kode).",
-      "- Jika ada keterbatasan (misal hanya cuplikan), jelaskan singkat.",
+      "- Jika ada keterbatasan, jelaskan singkat.",
     ].join("\n");
 
     const result = await model.generateContent(prompt);
