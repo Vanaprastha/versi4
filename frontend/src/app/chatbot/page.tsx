@@ -47,7 +47,7 @@ export default function ChatbotPage() {
   };
 
   return (
-    <div className="p-6 max-w-3xl mx-auto space-y-6">
+    <div className="p-6 max-w-5xl mx-auto space-y-6">
       <h1 className="text-3xl font-bold text-center text-blue-700 drop-shadow-md">
         💬 Chatbot SDGs
       </h1>
@@ -56,7 +56,7 @@ export default function ChatbotPage() {
       </p>
 
       {/* Chat Window */}
-      <div className="glass-4 border rounded-2xl shadow-md p-4 h-[60vh] overflow-y-auto bg-gradient-to-b from-white/90 to-blue-50/50 backdrop-blur space-y-3">
+      <div className="glass-4 border rounded-2xl shadow-lg p-6 h-[70vh] overflow-y-auto bg-gradient-to-b from-white/95 to-blue-50/70 backdrop-blur-md space-y-4">
         <AnimatePresence>
           {logs.map((m, i) => (
             <motion.div
@@ -68,11 +68,11 @@ export default function ChatbotPage() {
               className={`flex ${m.role === "user" ? "justify-end" : "justify-start"}`}
             >
               <div
-                className={`px-4 py-2 rounded-2xl max-w-lg break-words prose prose-sm ${
+                className={`px-5 py-3 rounded-2xl break-words prose prose-sm shadow ${
                   m.role === "user"
-                    ? "bg-blue-600 text-white self-end"
-                    : "bg-green-100 text-green-900"
-                }`}
+                    ? "bg-blue-600 text-white self-end rounded-br-none"
+                    : "bg-green-100 text-green-900 rounded-bl-none"
+                } w-full sm:w-4/5 md:w-3/4 lg:w-2/3`}
               >
                 <b>{m.role === "user" ? "Kamu" : "Asisten"}:</b>{" "}
                 {/* @ts-expect-error react-markdown typing issue */}
@@ -96,12 +96,12 @@ export default function ChatbotPage() {
           onChange={(e) => setQ(e.target.value)}
           onKeyDown={onKeyDown}
           placeholder="Contoh: Desa mana yang punya angka tertinggi di SDG 1?"
-          className="flex-1 border rounded-xl px-4 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400 bg-transparent"
+          className="flex-1 border rounded-xl px-4 py-3 shadow focus:outline-none focus:ring-2 focus:ring-blue-400 bg-white/70 backdrop-blur-md"
         />
         <button
           onClick={send}
           disabled={loading}
-          className="px-6 py-2 rounded-xl bg-emerald-600/30 hover:bg-emerald-600/50 transition text-white font-medium shadow disabled:opacity-50"
+          className="px-6 py-3 rounded-xl bg-emerald-600/80 hover:bg-emerald-600 transition text-white font-medium shadow disabled:opacity-50"
         >
           Kirim
         </button>
