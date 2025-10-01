@@ -7,7 +7,7 @@ const supabase = createClient(
 );
 
 export async function GET() {
-  // 1. Ambil data sdgs_1
+  // --- Ambil data utama
   const { data: sdgs, error: err1 } = await supabase
     .from("sdgs_1")
     .select("*");
@@ -16,7 +16,7 @@ export async function GET() {
     return NextResponse.json({ error: err1.message }, { status: 500 });
   }
 
-  // 2. Ambil data lokasi
+  // --- Ambil lokasi
   const { data: lokasi, error: err2 } = await supabase
     .from("location_village")
     .select("nama_desa, latitude, longitude");
@@ -25,7 +25,7 @@ export async function GET() {
     return NextResponse.json({ error: err2.message }, { status: 500 });
   }
 
-  // 3. Ambil arti kolom
+  // --- Ambil arti kolom
   const { data: labels, error: err3 } = await supabase
     .from("feature_label")
     .select("kode_kolom, arti_data");
@@ -34,19 +34,27 @@ export async function GET() {
     return NextResponse.json({ error: err3.message }, { status: 500 });
   }
 
-  // --- Buat dictionary lokasi ---
+  // --- Debug: tampilkan jumlah data
+  console.log("Jumlah sdgs:", sdgs?.length);
+  console.log("Jumlah lokasi:", lokasi?.length);
+  console.log("Contoh lokasi[0]:", lokasi?.[0]);
+
+  // --- Buat dictionary lokasi (uppercase biar aman)
   const lokasiMap: Record<string, any> = {};
   lokasi?.forEach((l) => {
-    lokasiMap[l.nama_desa] = { latitude: l.latitude, longitude: l.longitude };
+    lokasiMap[l.nama_desa.trim().toUpperCase()] = {
+      latitude: l.latitude,
+      longitude: l.longitude,
+    };
   });
 
-  // --- Buat dictionary arti kolom ---
+  // --- Buat dictionary arti kolom
   const labelMap: Record<string, string> = {};
   labels?.forEach((l) => {
     labelMap[l.kode_kolom] = l.arti_data;
   });
 
-  // --- Gabungkan hasil ---
+  // --- Gabungkan hasil
   const result = sdgs?.map((row) => {
     const indikator: Record<string, any> = {};
     ["r710", "r1502_7", "r1502_8", "r1502_4", "r1502_9"].forEach((kode) => {
@@ -64,7 +72,8 @@ export async function GET() {
       r1502_8: row.r1502_8,
       r1502_4: row.r1502_4,
       r1502_9: row.r1502_9,
-      location_village: lokasiMap[row.nama_desa] || null,
+      location_village:
+        lokasiMap[row.nama_desa.trim().toUpperCase()] || "NOT FOUND",
       indikator,
     };
   });
