@@ -7,7 +7,7 @@ const supabase = createClient(
 );
 
 export async function GET() {
-  // 1. Ambil data utama sdgs_1
+  // 1. Ambil data sdgs_1
   const { data: sdgs, error: err1 } = await supabase
     .from("sdgs_1")
     .select("*");
@@ -16,7 +16,7 @@ export async function GET() {
     return NextResponse.json({ error: err1.message }, { status: 500 });
   }
 
-  // 2. Ambil lokasi
+  // 2. Ambil data lokasi
   const { data: lokasi, error: err2 } = await supabase
     .from("location_village")
     .select("nama_desa, latitude, longitude");
@@ -34,7 +34,7 @@ export async function GET() {
     return NextResponse.json({ error: err3.message }, { status: 500 });
   }
 
-  // Buat dictionary
+  // --- Buat dictionary ---
   const lokasiMap: Record<string, any> = {};
   lokasi?.forEach((l) => {
     lokasiMap[l.nama_desa] = { latitude: l.latitude, longitude: l.longitude };
@@ -45,7 +45,7 @@ export async function GET() {
     labelMap[l.kode_kolom] = l.arti_data;
   });
 
-  // 4. Gabungkan hasil
+  // --- Gabungkan hasil ---
   const result = sdgs?.map((row) => {
     const indikator: Record<string, any> = {};
     ["r710", "r1502_7", "r1502_8", "r1502_4", "r1502_9"].forEach((kode) => {
