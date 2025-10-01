@@ -58,7 +58,7 @@ export default function MapSDG() {
   const center: [number, number] = [-8.2609867, 112.3566442];
 
   return (
-    <MapContainer center={center} zoom={13} style={{ height: "600px", width: "100%" }}>
+    <MapContainer center={center as any} zoom={13} style={{ height: "600px", width: "100%" }}>
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
