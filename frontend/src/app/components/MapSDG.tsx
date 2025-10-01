@@ -62,6 +62,7 @@ export default function MapSDG() {
     <MapContainer center={center as any} zoom={13} style={{ height: "600px", width: "100%" }}>
       // @ts-ignore
       <TileLayer
+        // @ts-ignore
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
