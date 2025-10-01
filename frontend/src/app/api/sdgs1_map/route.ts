@@ -7,31 +7,45 @@ const supabase = createClient(
 );
 
 export async function GET() {
-  // 1. Ambil data utama dari sdgs_1 + lokasi
+  // 1. Ambil data utama sdgs_1
   const { data: sdgs, error: err1 } = await supabase
     .from("sdgs_1")
-    .select("*, location_village(latitude,longitude)");
+    .select("*");
 
   if (err1) {
     return NextResponse.json({ error: err1.message }, { status: 500 });
   }
 
-  // 2. Ambil arti kolom dari feature_label
-  const { data: labels, error: err2 } = await supabase
-    .from("feature_label")
-    .select("kode_kolom, arti_data");
+  // 2. Ambil lokasi
+  const { data: lokasi, error: err2 } = await supabase
+    .from("location_village")
+    .select("nama_desa, latitude, longitude");
 
   if (err2) {
     return NextResponse.json({ error: err2.message }, { status: 500 });
   }
 
-  // 3. Buat dictionary label
+  // 3. Ambil arti kolom
+  const { data: labels, error: err3 } = await supabase
+    .from("feature_label")
+    .select("kode_kolom, arti_data");
+
+  if (err3) {
+    return NextResponse.json({ error: err3.message }, { status: 500 });
+  }
+
+  // Buat dictionary
+  const lokasiMap: Record<string, any> = {};
+  lokasi?.forEach((l) => {
+    lokasiMap[l.nama_desa] = { latitude: l.latitude, longitude: l.longitude };
+  });
+
   const labelMap: Record<string, string> = {};
   labels?.forEach((l) => {
     labelMap[l.kode_kolom] = l.arti_data;
   });
 
-  // 4. Transform ke output target
+  // 4. Gabungkan hasil
   const result = sdgs?.map((row) => {
     const indikator: Record<string, any> = {};
     ["r710", "r1502_7", "r1502_8", "r1502_4", "r1502_9"].forEach((kode) => {
@@ -49,12 +63,7 @@ export async function GET() {
       r1502_8: row.r1502_8,
       r1502_4: row.r1502_4,
       r1502_9: row.r1502_9,
-      location_village: row.location_village
-        ? {
-            latitude: row.location_village.latitude,
-            longitude: row.location_village.longitude,
-          }
-        : null,
+      location_village: lokasiMap[row.nama_desa] || null,
       indikator,
     };
   });
