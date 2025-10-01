@@ -70,6 +70,7 @@ export default function MapSDG() {
         <Marker
           key={`${v.nama_desa}-${i}`}
           position={[v.location_village.latitude, v.location_village.longitude]}
+          // @ts-ignore
           icon={getClusterIcon(v.cluster)}
         >
           <Popup>
