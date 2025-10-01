@@ -7,7 +7,7 @@ const supabase = createClient(
 );
 
 export async function GET() {
-  // 1. Ambil data utama dari sdgs_1
+  // 1. Ambil data sdgs_1
   const { data: sdgs, error: err1 } = await supabase
     .from("sdgs_1")
     .select("*");
@@ -34,11 +34,10 @@ export async function GET() {
     return NextResponse.json({ error: err3.message }, { status: 500 });
   }
 
-  // --- Buat dictionary lokasi (pakai uppercase untuk matching) ---
+  // --- Buat dictionary lokasi ---
   const lokasiMap: Record<string, any> = {};
   lokasi?.forEach((l) => {
-    const key = l.nama_desa.trim().toUpperCase();
-    lokasiMap[key] = { latitude: l.latitude, longitude: l.longitude };
+    lokasiMap[l.nama_desa] = { latitude: l.latitude, longitude: l.longitude };
   });
 
   // --- Buat dictionary arti kolom ---
@@ -65,7 +64,7 @@ export async function GET() {
       r1502_8: row.r1502_8,
       r1502_4: row.r1502_4,
       r1502_9: row.r1502_9,
-      location_village: lokasiMap[row.nama_desa.trim().toUpperCase()] || null,
+      location_village: lokasiMap[row.nama_desa] || null,
       indikator,
     };
   });
