@@ -85,7 +85,8 @@ export default function MapSDG({ goal }: Props) {
         <div className="mb-2 text-sm text-red-400">Gagal memuat data: {error}</div>
       )}
       // @ts-ignore
-      <MapContainer center={center as any} zoom={13} style={{ height: 420, width: "100%", borderRadius: 12 }}>
+      {/* @ts-expect-error leaflet typing bug */}
+      <MapContainer center={[-7.802, 112.02] as any} zoom={13} style={{ height: 420, width: "100%", borderRadius: 12 }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {data.map((v, idx) => {
           const lat = Number(v.latitude);
