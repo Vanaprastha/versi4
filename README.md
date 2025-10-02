@@ -80,3 +80,8 @@ Edit gambar di `asset/`, lalu jalankan:
 python scripts/sync_assets.py
 ```
 Aset akan tersalin ke `frontend/public/assets`.
+
+
+## Clustering Page
+Visit `/clustering` to pick SDGs (1..17) and see an interactive map.
+Requires `react-leaflet` & `leaflet`. The page imports `leaflet/dist/leaflet.css`.
