@@ -1,10 +1,13 @@
-
 "use client";
 
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
-import L, { LatLngExpression } from "leaflet";
+import L from "leaflet";
+
+type Props = {
+  goal: number; // 1..17
+};
 
 const clusterColors: Record<number, string> = { 0: "blue", 1: "green", 2: "red", 3: "orange" };
 
@@ -16,76 +19,95 @@ const getClusterIcon = (cluster: number) => {
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
+    shadowSize: [41, 41],
   });
 };
 
-type Village = {
-  nama_desa: string;
-  cluster: number;
-  arti_cluster: string;
-  indikator: Record<string, number>;
-  location_village: { latitude: number; longitude: number };
-};
-
 function Legend({ clusters }: { clusters: Record<number, string> }) {
-  const map = useMap();
-  useEffect(() => {
-    const legend = L.control({ position: "bottomright" });
-    legend.onAdd = () => {
-      const div = L.DomUtil.create("div", "info legend");
-      div.setAttribute("style", "background:#fff;padding:8px;border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.15);font-size:12px");
-      div.innerHTML = "<strong>Cluster</strong><br/>";
-      Object.entries(clusters).forEach(([key, color]) => {
-        div.innerHTML += `<div style="display:flex;align-items:center;margin:4px 0;">
-          <img src="https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-${color}.png" style="width:14px;height:22px;margin-right:6px;" />
-          <span>Cluster ${key}</span></div>`;
-      });
-      return div;
-    };
-    legend.addTo(map);
-    return () => legend.remove();
-  }, [map, clusters]);
-  return null;
+  return (
+    <div
+      style={{
+        position: "absolute",
+        bottom: 16,
+        right: 16,
+        background: "rgba(0,0,0,0.6)",
+        color: "white",
+        padding: "8px 12px",
+        borderRadius: 8,
+        fontSize: 12,
+      }}
+    >
+      <div style={{ fontWeight: 700, marginBottom: 4 }}>Legenda Cluster</div>
+      {Object.entries(clusters).map(([k, clr]) => (
+        <div key={k} style={{ display: "flex", alignItems: "center", gap: 8 }}>
+          <span
+            style={{
+              display: "inline-block",
+              width: 10,
+              height: 10,
+              background: clr,
+              borderRadius: 2,
+            }}
+          />
+          <span>Cluster {k}</span>
+        </div>
+      ))}
+    </div>
+  );
 }
 
-export default function MapSDG() {
-  const [data, setData] = useState<Village[]>([]);
+export default function MapSDG({ goal }: Props) {
+  const [data, setData] = useState<any[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/api/sdgs1_map").then(r => r.json()).then(setData).catch(() => setData([]));
-  }, []);
+    setLoading(true);
+    setError(null);
+    fetch(`/api/map/${goal}`)
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`);
+        return r.json();
+      })
+      .then((d) => setData(Array.isArray(d) ? d : []))
+      .catch((e) => setError(String(e)))
+      .finally(() => setLoading(false));
+  }, [goal]);
 
-  const center: [number, number] = [-8.2609867, 112.3566442];
+  const center: [number, number] = [-7.802, 112.02];
 
   return (
-      // @ts-ignore
-    <MapContainer center={center as any} zoom={13} style={{ height: "600px", width: "100%" }}>
-      // @ts-ignore
-      <TileLayer
-        // @ts-ignore
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      {data.map((v, i) => (
-        <Marker
-          key={`${v.nama_desa}-${i}`}
-          position={[v.location_village.latitude, v.location_village.longitude]}
-          // @ts-ignore
-          icon={getClusterIcon(v.cluster)}
-        >
-          <Popup>
-            <div style={{ fontSize: 12, minWidth: 220 }}>
-              <div style={{ fontWeight: 700 }}>{v.nama_desa}</div>
-              <div><b>Cluster {v.cluster}</b> ({v.arti_cluster})</div>
-              <hr />
-              {Object.entries(v.indikator).map(([label, value]) => (
-                <div key={label}>{label}: {String(value)}</div>
-              ))}
-            </div>
-          </Popup>
-        </Marker>
-      ))}
-      <Legend clusters={clusterColors} />
-    </MapContainer>
+    <div style={{ position: "relative" }}>
+      {loading && (
+        <div className="mb-2 text-sm text-neutral-400">Memuat peta SDGs {goal}…</div>
+      )}
+      {error && (
+        <div className="mb-2 text-sm text-red-400">Gagal memuat data: {error}</div>
+      )}
+      <MapContainer center={center} zoom={13} style={{ height: 420, width: "100%", borderRadius: 12 }}>
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        {data.map((v, idx) => {
+          const lat = Number(v.latitude);
+          const lon = Number(v.longitude);
+          if (!isFinite(lat) || !isFinite(lon)) return null;
+          const icon = getClusterIcon(Number(v.cluster ?? 0));
+          return (
+            <Marker key={idx} position={[lat, lon]} icon={icon}>
+              <Popup>
+                <div style={{ fontSize: 12, minWidth: 220 }}>
+                  <div style={{ fontWeight: 700 }}>{v.nama_desa}</div>
+                  <div><b>Cluster {v.cluster}</b> {v.arti_cluster ? `(${v.arti_cluster})` : ""}</div>
+                  <hr />
+                  {v.indikator && Object.entries(v.indikator).map(([label, value]: any) => (
+                    <div key={String(label)}>{String(label)}: {String(value)}</div>
+                  ))}
+                </div>
+              </Popup>
+            </Marker>
+          );
+        })}
+        <Legend clusters={clusterColors} />
+      </MapContainer>
+    </div>
   );
 }
