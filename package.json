@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "framer-motion": "^12.23.22",
-    "react-markdown": "^8.0.7"
+    "react-markdown": "^8.0.7",
+    "leaflet": "^1.9.4",
+    "react-leaflet": "^5.0.0"
   }
 }
+
