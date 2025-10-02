@@ -74,8 +74,6 @@ export default function MapSDG({ goal }: Props) {
       .finally(() => setLoading(false));
   }, [goal]);
 
-  const center = [-7.802, 112.02] as [number, number];
-
   return (
     <div style={{ position: "relative" }}>
       {loading && (
