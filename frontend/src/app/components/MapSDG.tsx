@@ -3,7 +3,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
-import L, { LatLngExpression } from "leaflet";
+import L from "leaflet";
 
 type Props = {
   goal: number; // 1..17
@@ -74,7 +74,7 @@ export default function MapSDG({ goal }: Props) {
       .finally(() => setLoading(false));
   }, [goal]);
 
-  const center: LatLngExpression = [-7.802, 112.02];
+  const center = [-7.802, 112.02] as [number, number];
 
   return (
     <div style={{ position: "relative" }}>
@@ -84,7 +84,7 @@ export default function MapSDG({ goal }: Props) {
       {error && (
         <div className="mb-2 text-sm text-red-400">Gagal memuat data: {error}</div>
       )}
-      <MapContainer center={center} zoom={13} style={{ height: 420, width: "100%", borderRadius: 12 }}>
+      <MapContainer center={center as any} zoom={13} style={{ height: 420, width: "100%", borderRadius: 12 }}>
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
         {data.map((v, idx) => {
           const lat = Number(v.latitude);
