@@ -58,6 +58,7 @@ export default function MapSDG({ goal }: Props) {
           Gagal memuat data: {error}
         </div>
       )}
+      // @ts-ignore
       <MapContainer
         center={[-7.802, 112.02] as any}
         zoom={13}
@@ -71,6 +72,7 @@ export default function MapSDG({ goal }: Props) {
           const icon = getClusterIcon(Number(v.cluster ?? 0));
           return (
             // @ts-expect-error leaflet typing bug
+            // @ts-ignore
             <Marker key={idx} position={[lat, lon]} icon={icon as any}>
               <Popup>
                 <div style={{ fontSize: 12, minWidth: 220 }}>
