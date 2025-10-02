@@ -58,8 +58,6 @@ export default function MapSDG({ goal }: Props) {
           Gagal memuat data: {error}
         </div>
       )}
-
-      {/* @ts-expect-error leaflet typing bug */}
       <MapContainer
         center={[-7.802, 112.02] as any}
         zoom={13}
