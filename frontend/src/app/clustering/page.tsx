@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import MapSDG from "../components/MapSDG";
+import dynamic from "next/dynamic";
+
+const MapSDG = dynamic(() => import("../components/MapSDG"), { ssr: false });
 
 const sdgOptions = [
   { value: 1, label: "SDG 1 : Tanpa Kemiskinan" },
