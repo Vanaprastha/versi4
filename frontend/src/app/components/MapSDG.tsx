@@ -48,21 +48,95 @@ function Legend({ clusters }: { clusters: Record<number, string> }) {
   return null;
 }
 
-export default function MapSDG() {
+type MapSDGProps = {
+  goal: number;
+};
+
+export default function MapSDG({ goal }: MapSDGProps) {
   const [data, setData] = useState<Village[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    fetch("/api/sdgs1_map").then(r => r.json()).then(setData).catch(() => setData([]));
-  }, []);
+    const controller = new AbortController();
+    const fetchData = async () => {
+      setIsLoading(true);
+      setError(null);
+      try {
+        const endpoint = `/api/sdgs${goal === 1 ? "1_map" : `${goal}_map`}`;
+        const response = await fetch(endpoint, { signal: controller.signal });
+        if (!response.ok) {
+          throw new Error(`Gagal memuat data untuk SDGs ${goal}`);
+        }
+        const payload: unknown = await response.json();
+        const sanitized: Village[] = Array.isArray(payload)
+          ? payload
+              .map((entry: any) => {
+                const location = entry?.location_village;
+                if (
+                  location &&
+                  typeof location === "object" &&
+                  typeof location.latitude === "number" &&
+                  typeof location.longitude === "number"
+                ) {
+                  return {
+                    ...entry,
+                    location_village: {
+                      latitude: location.latitude,
+                      longitude: location.longitude,
+                    },
+                  } as Village;
+                }
+                return null;
+              })
+              .filter((entry): entry is Village => entry !== null)
+          : [];
+        setData(sanitized);
+      } catch (err) {
+        if ((err as Error).name !== "AbortError") {
+          console.error(err);
+          setError((err as Error).message);
+          setData([]);
+        }
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  const center: [number, number] = [-8.2609867, 112.3566442];
+    fetchData();
+
+    return () => controller.abort();
+  }, [goal]);
+
+  const center: LatLngExpression = [-8.2609867, 112.3566442];
+
+  if (isLoading) {
+    return (
+      <div className="flex h-[600px] w-full items-center justify-center bg-gray-50 text-sm text-gray-500">
+        Memuat peta untuk SDGs {goal}...
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-[600px] w-full items-center justify-center bg-red-50 text-center text-sm text-red-600">
+        {error}
+      </div>
+    );
+  }
+
+  if (!data.length) {
+    return (
+      <div className="flex h-[600px] w-full items-center justify-center bg-gray-50 text-center text-sm text-gray-500">
+        Data peta untuk SDGs {goal} tidak tersedia.
+      </div>
+    );
+  }
 
   return (
-      // @ts-ignore
-    <MapContainer center={center as any} zoom={13} style={{ height: "600px", width: "100%" }}>
-      // @ts-ignore
+    <MapContainer center={center} zoom={13} style={{ height: "600px", width: "100%" }}>
       <TileLayer
-        // @ts-ignore
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
@@ -70,7 +144,6 @@ export default function MapSDG() {
         <Marker
           key={`${v.nama_desa}-${i}`}
           position={[v.location_village.latitude, v.location_village.longitude]}
-          // @ts-ignore
           icon={getClusterIcon(v.cluster)}
         >
           <Popup>
