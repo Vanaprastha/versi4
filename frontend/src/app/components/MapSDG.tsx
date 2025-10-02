@@ -94,7 +94,8 @@ export default function MapSDG({ goal }: Props) {
           if (!isFinite(lat) || !isFinite(lon)) return null;
           const icon = getClusterIcon(Number(v.cluster ?? 0));
           return (
-            <Marker key={idx} position={[lat, lon]} icon={icon}>
+            {/* @ts-expect-error leaflet typing bug */}
+            <Marker key={idx} position={[lat, lon]} icon={icon as any}>
               <Popup>
                 <div style={{ fontSize: 12, minWidth: 220 }}>
                   <div style={{ fontWeight: 700 }}>{v.nama_desa}</div>
