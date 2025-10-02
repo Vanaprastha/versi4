@@ -3,7 +3,7 @@
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { useEffect, useState } from "react";
 import "leaflet/dist/leaflet.css";
-import L from "leaflet";
+import L, { LatLngExpression } from "leaflet";
 
 type Props = {
   goal: number; // 1..17
@@ -74,7 +74,7 @@ export default function MapSDG({ goal }: Props) {
       .finally(() => setLoading(false));
   }, [goal]);
 
-  const center: [number, number] = [-7.802, 112.02];
+  const center: LatLngExpression = [-7.802, 112.02];
 
   return (
     <div style={{ position: "relative" }}>

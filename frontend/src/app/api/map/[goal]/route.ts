@@ -9,9 +9,7 @@ function hasEnv() {
 }
 
 export async function GET(req: NextRequest) {
-  // ambil param goal dari URL
   const { pathname } = new URL(req.url);
-  // "/api/map/3" → ambil angka terakhir
   const parts = pathname.split("/");
   const goalStr = parts[parts.length - 1];
   const goalNum = parseInt(goalStr, 10) || 1;
@@ -74,4 +72,3 @@ export async function GET(req: NextRequest) {
 
   return NextResponse.json(result);
 }
-
