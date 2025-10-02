@@ -8,16 +8,19 @@ function hasEnv() {
   return Boolean(url && key);
 }
 
-export async function GET(req: NextRequest, context: { params: { goal: string } }) {
-  const { goal } = context.params;
-  const goalNum = parseInt(goal, 10) || 1;
+export async function GET(req: NextRequest) {
+  // ambil param goal dari URL
+  const { pathname } = new URL(req.url);
+  // "/api/map/3" → ambil angka terakhir
+  const parts = pathname.split("/");
+  const goalStr = parts[parts.length - 1];
+  const goalNum = parseInt(goalStr, 10) || 1;
 
   if (isNaN(goalNum) || goalNum < 1 || goalNum > 17) {
     return NextResponse.json({ error: "goal harus 1..17" }, { status: 400 });
   }
 
   if (!hasEnv()) {
-    // Fallback demo data
     return NextResponse.json([
       { nama_desa: "RINGIN REJO", latitude: -7.806, longitude: 112.017, cluster: 0, arti_cluster: "Rendah", indikator: { "Contoh indikator A": 64 } },
       { nama_desa: "SUKOREJO", latitude: -7.805, longitude: 112.020, cluster: 1, arti_cluster: "Sedang", indikator: { "Contoh indikator A": 21 } },
@@ -33,7 +36,10 @@ export async function GET(req: NextRequest, context: { params: { goal: string } 
   const { data: lokasi } = await supabase.from("location_village").select("*");
   const lokasiMap: Record<string, any> = {};
   lokasi?.forEach((row) => {
-    lokasiMap[(row.nama_desa || "").trim().toUpperCase()] = { lat: row.latitude, lon: row.longitude };
+    lokasiMap[(row.nama_desa || "").trim().toUpperCase()] = {
+      lat: row.latitude,
+      lon: row.longitude,
+    };
   });
 
   const fieldNames = Object.keys(sdgs?.[0] || {}).filter(
@@ -46,7 +52,9 @@ export async function GET(req: NextRequest, context: { params: { goal: string } 
     .in("kode_kolom", fieldNames);
 
   const labelMap: Record<string, string> = {};
-  labels?.forEach((r) => (labelMap[r.kode_kolom.toLowerCase()] = r.arti_data || r.kode_kolom));
+  labels?.forEach(
+    (r) => (labelMap[r.kode_kolom.toLowerCase()] = r.arti_data || r.kode_kolom)
+  );
 
   const result = (sdgs || []).map((row) => {
     const indikator: Record<string, any> = {};
@@ -66,3 +74,4 @@ export async function GET(req: NextRequest, context: { params: { goal: string } 
 
   return NextResponse.json(result);
 }
+
