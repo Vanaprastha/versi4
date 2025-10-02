@@ -107,7 +107,41 @@ export default function MapSDG({ goal }: Props) {
           );
         })}
         <Legend clusters={clusterColors} />
-      </MapContainer>
+        <Legend />
+</MapContainer>
     </div>
   );
+}
+
+
+import L from "leaflet";
+import { useMap } from "react-leaflet";
+import { useEffect } from "react";
+
+function Legend() {
+  const map = useMap();
+
+  useEffect(() => {
+    const legend = L.control({ position: "bottomright" });
+
+    legend.onAdd = () => {
+      const div = L.DomUtil.create("div", "info legend");
+      div.innerHTML = `
+        <div style="background: rgba(0,0,0,0.6); color:white; padding:8px; border-radius:6px; font-size:12px">
+          <b>Legenda Cluster</b><br/>
+          <i style="background:green; width:12px; height:12px; display:inline-block; margin-right:4px"></i> Rendah<br/>
+          <i style="background:orange; width:12px; height:12px; display:inline-block; margin-right:4px"></i> Sedang<br/>
+          <i style="background:red; width:12px; height:12px; display:inline-block; margin-right:4px"></i> Tinggi
+        </div>
+      `;
+      return div;
+    };
+
+    legend.addTo(map);
+    return () => {
+      legend.remove();
+    };
+  }, [map]);
+
+  return null;
 }
