@@ -27,15 +27,10 @@ export async function GET(req: NextRequest) {
         longitude: 112.017,
         cluster: 0,
         arti_cluster: "Rendah",
-        indikator: { "Contoh indikator A": 64 },
-      },
-      {
-        nama_desa: "SUKOREJO",
-        latitude: -7.805,
-        longitude: 112.02,
-        cluster: 1,
-        arti_cluster: "Sedang",
-        indikator: { "Contoh indikator A": 21 },
+        indikator: [
+          "1. Contoh indikator A: 64",
+          "2. Contoh indikator B: Ada",
+        ],
       },
     ]);
   }
@@ -64,7 +59,7 @@ export async function GET(req: NextRequest) {
     .select("kode_kolom, nama_kolom, arti_data")
     .in("kode_kolom", fieldNames);
 
-  // mapping kode_kolom → { nama: string, values: { "1": "Ada", "2": "Tidak Ada", ... } }
+  // mapping kode_kolom → { nama: string, values: { "1": "Ada", "2": "Tidak Ada" } }
   const labelMap: Record<
     string,
     { nama: string; values: Record<string, string> }
@@ -77,7 +72,6 @@ export async function GET(req: NextRequest) {
     }
 
     if (r.arti_data?.includes("=")) {
-      // parsing multiple mapping: "1 = A, 2 = B, 3 = C"
       const parts = r.arti_data.split(",");
       parts.forEach((p) => {
         if (p.includes("=")) {
@@ -88,13 +82,14 @@ export async function GET(req: NextRequest) {
         }
       });
     } else {
-      // arti_data tanpa "=" → berarti indikator numerik → pakai arti_data sebagai nama
+      // arti_data tanpa "=" → numerik → gunakan arti_data sebagai nama indikator
       labelMap[kode].nama = r.arti_data || r.nama_kolom || r.kode_kolom;
     }
   });
 
   const result = (sdgs || []).map((row) => {
-    const indikator: Record<string, any> = {};
+    const indikator: string[] = [];
+    let counter = 1;
 
     fieldNames.forEach((k) => {
       const key = k.toLowerCase();
@@ -103,15 +98,15 @@ export async function GET(req: NextRequest) {
 
       if (lbl) {
         if (Object.keys(lbl.values).length > 0) {
-          // kategorikal: pakai arti_data
-          indikator[lbl.nama] = lbl.values[String(rawVal).trim()] ?? rawVal;
+          const arti = lbl.values[String(rawVal).trim()] ?? rawVal;
+          indikator.push(`${counter}. ${lbl.nama}: ${arti}`);
         } else {
-          // numerik: pakai angka mentah
-          indikator[lbl.nama] = rawVal;
+          indikator.push(`${counter}. ${lbl.nama}: ${rawVal}`);
         }
       } else {
-        indikator[k] = rawVal;
+        indikator.push(`${counter}. ${k}: ${rawVal}`);
       }
+      counter++;
     });
 
     const lv = lokasiMap[(row.nama_desa || "").trim().toUpperCase()] || {};
