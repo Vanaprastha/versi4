@@ -1,77 +1,109 @@
+import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL as string,
-  process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY as string
-);
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
+const key = process.env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_DEFAULT_KEY || "";
 
-export async function GET(
-  req: Request,
-  { params }: { params: { goal: string } }
-): Promise<Response> {
-  const goal = params.goal;
+function hasEnv() {
+  return Boolean(url && key);
+}
 
-  // Ambil data sdgs_N + join dengan lokasi
-  const { data: rows, error } = await supabase
-    .from(`sdgs_${goal}`)
-    .select("*, location_village(latitude,longitude)");
+export async function GET(req: NextRequest) {
+  const { pathname } = new URL(req.url);
+  const parts = pathname.split("/");
+  const goalStr = parts[parts.length - 1];
+  const goalNum = parseInt(goalStr, 10) || 1;
 
-  if (error) {
-    return new Response(JSON.stringify({ error: error.message }), {
-      status: 500,
-    });
+  if (isNaN(goalNum) || goalNum < 1 || goalNum > 17) {
+    return NextResponse.json({ error: "goal harus 1..17" }, { status: 400 });
   }
 
-  // Ambil label indikator
-  const { data: labels } = await supabase
-    .from("feature_label")
-    .select("kode_kolom,nama_kolom,arti_data");
-
-  const labelMap: Record<string, { nama: string; arti: string }> = {};
-  if (labels) {
-    labels.forEach((l: any) => {
-      labelMap[l.kode_kolom] = {
-        nama: l.nama_kolom,
-        arti: l.arti_data,
-      };
-    });
+  if (!hasEnv()) {
+    return NextResponse.json([
+      {
+        nama_desa: "RINGIN REJO",
+        latitude: -7.806,
+        longitude: 112.017,
+        cluster: 0,
+        arti_cluster: "Rendah",
+        indikator: { "Contoh indikator A": 64 },
+      },
+      {
+        nama_desa: "SUKOREJO",
+        latitude: -7.805,
+        longitude: 112.02,
+        cluster: 1,
+        arti_cluster: "Sedang",
+        indikator: { "Contoh indikator A": 21 },
+      },
+    ]);
   }
 
-  // Mapping hasil
-  const mapped = (rows ?? []).map((row: any) => {
-    const newRow: Record<string, any> = {
-      nama_desa: row.nama_desa,
-      cluster: row.cluster ?? null,
-      arti_cluster: row.arti_cluster ?? null,
-      latitude: row.location_village?.latitude ?? null,
-      longitude: row.location_village?.longitude ?? null,
+  const supabase = createClient(url, key);
+  const tableName = `sdgs_${goalNum}`;
+
+  const { data: sdgs, error: err1 } = await supabase.from(tableName).select("*");
+  if (err1) return NextResponse.json({ error: err1.message }, { status: 500 });
+
+  const { data: lokasi } = await supabase.from("location_village").select("*");
+  const lokasiMap: Record<string, any> = {};
+  lokasi?.forEach((row) => {
+    lokasiMap[(row.nama_desa || "").trim().toUpperCase()] = {
+      lat: row.latitude,
+      lon: row.longitude,
     };
-
-    Object.keys(row).forEach((k) => {
-      if (
-        k !== "nama_desa" &&
-        k !== "cluster" &&
-        k !== "arti_cluster" &&
-        k !== "location_village" &&
-        labelMap[k]
-      ) {
-        const artiData = labelMap[k].arti;
-        if (artiData && artiData.includes("=")) {
-          const mapping: Record<string, string> = {};
-          artiData.split(",").forEach((p: string) => {
-            const [val, label] = p.split("=");
-            if (val && label) mapping[val.trim()] = label.trim();
-          });
-          newRow[labelMap[k].nama] = mapping[row[k]] || row[k];
-        } else {
-          newRow[labelMap[k].nama] = row[k];
-        }
-      }
-    });
-
-    return newRow;
   });
 
-  return new Response(JSON.stringify(mapped), { status: 200 });
+  const fieldNames = Object.keys(sdgs?.[0] || {}).filter(
+    (k) => !["nama_desa", "cluster", "arti_cluster"].includes(k)
+  );
+
+  const { data: labels } = await supabase
+    .from("feature_label")
+    .select("kode_kolom, nama_kolom, arti_data")
+    .in("kode_kolom", fieldNames);
+
+  // mapping kolom → { nama: "...", values: {1:"Ada",2:"Tidak Ada"} }
+  const labelMap: Record<
+    string,
+    { nama: string; values: Record<string, string> }
+  > = {};
+
+  labels?.forEach((r) => {
+    const kode = r.kode_kolom.toLowerCase();
+    if (!labelMap[kode]) {
+      labelMap[kode] = { nama: r.nama_kolom || r.kode_kolom, values: {} };
+    }
+    // parsing arti_data format "1 = Ada"
+    if (r.arti_data?.includes("=")) {
+      const [val, arti] = r.arti_data.split("=");
+      labelMap[kode].values[val.trim()] = arti.trim();
+    }
+  });
+
+  const result = (sdgs || []).map((row) => {
+    const indikator: Record<string, any> = {};
+    fieldNames.forEach((k) => {
+      const key = k.toLowerCase();
+      const lbl = labelMap[key];
+      if (lbl) {
+        const rawVal = row[k];
+        indikator[lbl.nama] = lbl.values[rawVal?.toString()] || rawVal;
+      } else {
+        indikator[k] = row[k];
+      }
+    });
+    const lv = lokasiMap[(row.nama_desa || "").trim().toUpperCase()] || {};
+    return {
+      nama_desa: row.nama_desa,
+      latitude: lv.lat ?? null,
+      longitude: lv.lon ?? null,
+      cluster: row.cluster ?? null,
+      arti_cluster: row.arti_cluster ?? "",
+      indikator,
+    };
+  });
+
+  return NextResponse.json(result);
 }
 
