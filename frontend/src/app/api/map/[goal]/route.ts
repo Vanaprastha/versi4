@@ -75,11 +75,21 @@ export async function GET(req: NextRequest) {
     if (!labelMap[kode]) {
       labelMap[kode] = { nama: r.nama_kolom || r.kode_kolom, values: {} };
     }
+
     if (r.arti_data?.includes("=")) {
-      const [val, arti] = r.arti_data.split("=");
-      const kodeVal = String(val).trim();
-      const artiVal = String(arti).trim();
-      labelMap[kode].values[kodeVal] = artiVal;
+      // parsing multiple mapping: "1 = A, 2 = B, 3 = C"
+      const parts = r.arti_data.split(",");
+      parts.forEach((p) => {
+        if (p.includes("=")) {
+          const [val, arti] = p.split("=");
+          const kodeVal = String(val).trim();
+          const artiVal = String(arti).trim();
+          labelMap[kode].values[kodeVal] = artiVal;
+        }
+      });
+    } else {
+      // arti_data tanpa "=" → berarti indikator numerik → pakai arti_data sebagai nama
+      labelMap[kode].nama = r.arti_data || r.nama_kolom || r.kode_kolom;
     }
   });
 
@@ -92,9 +102,13 @@ export async function GET(req: NextRequest) {
       const rawVal = row[k];
 
       if (lbl) {
-        const arti = lbl.values[String(rawVal).trim()];
-        // ⚡ gunakan arti jika ada, jika tidak tampilkan angka mentah
-        indikator[lbl.nama] = arti ?? rawVal;
+        if (Object.keys(lbl.values).length > 0) {
+          // kategorikal: pakai arti_data
+          indikator[lbl.nama] = lbl.values[String(rawVal).trim()] ?? rawVal;
+        } else {
+          // numerik: pakai angka mentah
+          indikator[lbl.nama] = rawVal;
+        }
       } else {
         indikator[k] = rawVal;
       }
