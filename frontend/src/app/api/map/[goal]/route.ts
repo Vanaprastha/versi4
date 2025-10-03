@@ -93,13 +93,10 @@ export async function GET(req: NextRequest) {
 
       if (lbl) {
         const arti = lbl.values[String(rawVal).trim()];
-        if (arti) {
-          indikator[lbl.nama] = arti; // tampilkan arti_data
-        } else {
-          indikator[lbl.nama] = rawVal; // fallback angka jika tidak ada mapping
-        }
+        // ⚡ gunakan arti jika ada, jika tidak tampilkan angka mentah
+        indikator[lbl.nama] = arti ?? rawVal;
       } else {
-        indikator[k] = rawVal; // kalau tidak ada label sama sekali
+        indikator[k] = rawVal;
       }
     });
 
