@@ -18,6 +18,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "goal harus 1..17" }, { status: 400 });
   }
 
+  // fallback demo jika env kosong
   if (!hasEnv()) {
     return NextResponse.json([
       {
@@ -63,7 +64,7 @@ export async function GET(req: NextRequest) {
     .select("kode_kolom, nama_kolom, arti_data")
     .in("kode_kolom", fieldNames);
 
-  // mapping: kode_kolom → { nama: string, values: {kodeVal: artiVal} }
+  // mapping kode_kolom → { nama: string, values: { "1": "Ada", "2": "Tidak Ada", ... } }
   const labelMap: Record<
     string,
     { nama: string; values: Record<string, string> }
@@ -76,23 +77,29 @@ export async function GET(req: NextRequest) {
     }
     if (r.arti_data?.includes("=")) {
       const [val, arti] = r.arti_data.split("=");
-      labelMap[kode].values[val.trim()] = arti.trim();
+      const kodeVal = String(val).trim();
+      const artiVal = String(arti).trim();
+      labelMap[kode].values[kodeVal] = artiVal;
     }
   });
 
   const result = (sdgs || []).map((row) => {
     const indikator: Record<string, any> = {};
+
     fieldNames.forEach((k) => {
       const key = k.toLowerCase();
       const lbl = labelMap[key];
       const rawVal = row[k];
 
       if (lbl) {
-        // kalau ada mapping → tampilkan arti, kalau tidak → tampilkan angka
-        const arti = lbl.values[rawVal?.toString()];
-        indikator[lbl.nama] = arti ? arti : rawVal;
+        const arti = lbl.values[String(rawVal).trim()];
+        if (arti) {
+          indikator[lbl.nama] = arti; // tampilkan arti_data
+        } else {
+          indikator[lbl.nama] = rawVal; // fallback angka jika tidak ada mapping
+        }
       } else {
-        indikator[k] = rawVal;
+        indikator[k] = rawVal; // kalau tidak ada label sama sekali
       }
     });
 
