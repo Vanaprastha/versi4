@@ -63,7 +63,7 @@ export async function GET(req: NextRequest) {
     .select("kode_kolom, nama_kolom, arti_data")
     .in("kode_kolom", fieldNames);
 
-  // mapping kolom → { nama: "...", values: {1:"Ada",2:"Tidak Ada"} }
+  // mapping: kode_kolom → { nama: string, values: {kodeVal: artiVal} }
   const labelMap: Record<
     string,
     { nama: string; values: Record<string, string> }
@@ -74,7 +74,6 @@ export async function GET(req: NextRequest) {
     if (!labelMap[kode]) {
       labelMap[kode] = { nama: r.nama_kolom || r.kode_kolom, values: {} };
     }
-    // parsing arti_data format "1 = Ada"
     if (r.arti_data?.includes("=")) {
       const [val, arti] = r.arti_data.split("=");
       labelMap[kode].values[val.trim()] = arti.trim();
@@ -86,13 +85,17 @@ export async function GET(req: NextRequest) {
     fieldNames.forEach((k) => {
       const key = k.toLowerCase();
       const lbl = labelMap[key];
+      const rawVal = row[k];
+
       if (lbl) {
-        const rawVal = row[k];
-        indikator[lbl.nama] = lbl.values[rawVal?.toString()] || rawVal;
+        // kalau ada mapping → tampilkan arti, kalau tidak → tampilkan angka
+        const arti = lbl.values[rawVal?.toString()];
+        indikator[lbl.nama] = arti ? arti : rawVal;
       } else {
-        indikator[k] = row[k];
+        indikator[k] = rawVal;
       }
     });
+
     const lv = lokasiMap[(row.nama_desa || "").trim().toUpperCase()] || {};
     return {
       nama_desa: row.nama_desa,
