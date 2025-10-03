@@ -27,10 +27,7 @@ export async function GET(req: NextRequest) {
         longitude: 112.017,
         cluster: 0,
         arti_cluster: "Rendah",
-        indikator: [
-          "1. Contoh indikator A: 64",
-          "2. Contoh indikator B: Ada",
-        ],
+        indikator: "1. Contoh indikator A: 64\n2. Contoh indikator B: Ada",
       },
     ]);
   }
@@ -88,7 +85,7 @@ export async function GET(req: NextRequest) {
   });
 
   const result = (sdgs || []).map((row) => {
-    const indikator: string[] = [];
+    const indikatorList: string[] = [];
     let counter = 1;
 
     fieldNames.forEach((k) => {
@@ -99,12 +96,12 @@ export async function GET(req: NextRequest) {
       if (lbl) {
         if (Object.keys(lbl.values).length > 0) {
           const arti = lbl.values[String(rawVal).trim()] ?? rawVal;
-          indikator.push(`${counter}. ${lbl.nama}: ${arti}`);
+          indikatorList.push(`${counter}. ${lbl.nama}: ${arti}`);
         } else {
-          indikator.push(`${counter}. ${lbl.nama}: ${rawVal}`);
+          indikatorList.push(`${counter}. ${lbl.nama}: ${rawVal}`);
         }
       } else {
-        indikator.push(`${counter}. ${k}: ${rawVal}`);
+        indikatorList.push(`${counter}. ${k}: ${rawVal}`);
       }
       counter++;
     });
@@ -116,7 +113,7 @@ export async function GET(req: NextRequest) {
       longitude: lv.lon ?? null,
       cluster: row.cluster ?? null,
       arti_cluster: row.arti_cluster ?? "",
-      indikator,
+      indikator: indikatorList.join("\n"), // 🔥 gabungkan jadi string multi-baris
     };
   });
 
