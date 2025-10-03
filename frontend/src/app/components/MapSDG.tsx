@@ -117,12 +117,17 @@ export default function MapSDG({ goal }: Props) {
                     {v.arti_cluster ? `(${v.arti_cluster})` : ""}
                   </div>
                   <hr />
-                  {v.indikator &&
-                    Object.entries(v.indikator).map(([label, value]: any) => (
-                      <div key={String(label)}>
-                        {String(label)}: {String(value)}
-                      </div>
-                    ))}
+                  {v.indikator && (
+                    <div style={{ marginTop: 4 }}>
+                      {Array.isArray(v.indikator) ? (
+                        v.indikator.map((item: string, i: number) => (
+                          <div key={i}>{item}</div>
+                        ))
+                      ) : (
+                        <div>{String(v.indikator)}</div>
+                      )}
+                    </div>
+                  )}
                 </div>
               </Popup>
             </Marker>
